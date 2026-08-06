@@ -1,0 +1,248 @@
+  <!-- ===== CAROUSEL ===== -->
+  <section class="carousel" id="carousel">
+    <div class="carousel__track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+
+      <!-- Slide 1 -->
+      <div class="carousel__slide" [class.active]="currentSlide === 0">
+        <div class="carousel__slide-bg" style="background-image: url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1600&q=80');"></div>
+        <div class="carousel__content">
+          <p class="carousel__tag">Nueva Colección — 2025</p>
+          <h1 class="carousel__title">Hecha<br><em>para ti</em></h1>
+          <p class="carousel__subtitle">Prendas personalizadas con bordado y estampado de alta calidad. Tu estilo, tu identidad.</p>
+          <div class="carousel__actions">
+            <a href="/guiselmode/html/productos.html" class="btn-primary">Ver Colección</a>
+            <a href="/guiselmode/html/nosotros.html" class="btn-outline">Nosotros</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel__slide" [class.active]="currentSlide === 1" >
+        <div class="carousel__slide-bg" style="background-image: url('https://images.unsplash.com/photo-1554568218-0f1715e72254?w=1600&q=80');"></div>
+        <div class="carousel__content">
+          <p class="carousel__tag">Especial — Parejas & Familia</p>
+          <h1 class="carousel__title">Amor<br><em>bordado</em></h1>
+          <p class="carousel__subtitle">Conjuntos personalizados para parejas y familias. Momentos únicos merece prendas únicas.</p>
+          <div class="carousel__actions">
+            <a href="/guiselmode/html/productos.html" class="btn-primary">Explorar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel__slide" [class.active]="currentSlide === 2">
+        <div class="carousel__slide-bg" style="background-image: url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=1600&q=80');"></div>
+        <div class="carousel__content">
+          <p class="carousel__tag">Personaje — Edición Limitada</p>
+          <h1 class="carousel__title">Tu<br><em>universo</em></h1>
+          <p class="carousel__subtitle">Estampados de personajes favoritos con calidad premium. Del anime a la cultura pop.</p>
+          <div class="carousel__actions">
+            <a href="/guiselmode/html/nosotros.html" class="btn-primary">Descubrir</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+<!-- Controls -->
+<div class="carousel__controls">
+
+  <div class="carousel__dots">
+
+    <button
+      class="carousel__dot"
+      [class.active]="currentSlide === 0"
+      (click)="goToSlide(0); restartAutoplay()">
+    </button>
+
+    <button
+      class="carousel__dot"
+      [class.active]="currentSlide === 1"
+      (click)="goToSlide(1); restartAutoplay()">
+    </button>
+
+    <button
+      class="carousel__dot"
+      [class.active]="currentSlide === 2"
+      (click)="goToSlide(2); restartAutoplay()">
+    </button>
+
+  </div>
+
+  <div class="carousel__arrows">
+
+    <button
+      class="carousel__arrow"
+      aria-label="Anterior"
+      (click)="prevSlide(); restartAutoplay()">
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+    <button
+      class="carousel__arrow"
+      aria-label="Siguiente"
+      (click)="nextSlide(); restartAutoplay()">
+
+      <i class="fa-solid fa-arrow-right"></i>
+
+    </button>
+
+  </div>
+
+</div>
+
+    <div class="carousel__counter">
+  <span>{{ currentSlide + 1 }}</span> /
+  <span>{{ totalSlides }}</span>
+</div>
+
+  <!-- ===== PRODUCTOS DESTACADOS ===== -->
+  <section class="products-section">
+    <div class="container">
+      <div class="products-section__header">
+        <div>
+          <h2 class="section-title">Nuestros <span>Productos</span></h2>
+          <p>Prendas de vestir personalizadas en Trujillo, Perú. Bordado y estampado de alta calidad.</p>
+        </div>
+        <a href="/guiselmode/html/nosotros.html" class="btn-outline">Ver todos</a>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+
+        <!-- Card 1 -->
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <span class="product-card__badge">Nuevo</span>
+            <img src="/guiselmode/IMG/Card_Index/Card_01.webp" alt="Polera Personalizada" loading="lazy" />
+            <div class="product-card__overlay">
+              <a href="/guiselmode/html/productos.html#poleras" class="product-card__quick-view">Ver más</a>
+            </div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Poleras Personalizadas</h3>
+            <div class="product-card__footer">
+              <p class="product-card__price">S/ 165 <small>2 pzas aprox</small></p>
+              <button class="product-card__wishlist" title="Favorito">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <img src="/guiselmode/IMG/Card_Index/Card_02.webp" alt="Polos Personalizados" loading="lazy" />
+            <div class="product-card__overlay">
+              <a href="/guiselmode/html/productos.html#poleras" class="product-card__quick-view">Ver más</a>
+            </div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Polos Personalizados</h3>
+            <div class="product-card__footer">
+              <p class="product-card__price">S/ 30 <small>1 pza aprox</small></p>
+              <button class="product-card__wishlist" title="Favorito">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <span class="product-card__badge">Popular</span>
+            <img src="/guiselmode/IMG/Card_Index/Card_03.webp" alt="Poleras Familia" loading="lazy" />
+            <div class="product-card__overlay">
+              <a href="/guiselmode/html/productos.html#pijamas" class="product-card__quick-view">Ver más</a>
+            </div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Pijamas Personalizadas</h3>
+            <div class="product-card__footer">
+              <p class="product-card__price">S/ 125 <small>4 pzas aprox</small></p>
+              <button class="product-card__wishlist" title="Favorito">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <img src="/guiselmode/IMG/Card_Index/Card_04.webp" alt="Pijamas" loading="lazy" />
+            <div class="product-card__overlay">
+              <a href="/guiselmode/html/productos.html#conjuntos" class="product-card__quick-view">Ver más</a>
+            </div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Conjuntos Personalizados</h3>
+            <div class="product-card__footer">
+              <p class="product-card__price">S/ 330 <small>4 pzas aprox</small></p>
+              <button class="product-card__wishlist" title="Favorito">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <img src="/guiselmode/IMG/Card_Index/Card_Pol_Familia_estamapado_01.webp" alt="Pijamas" loading="lazy" />
+            <div class="product-card__overlay">
+              <a href="/guiselmode/html/productos.html#familia" class="product-card__quick-view">Ver más</a>
+            </div>
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Poleras Personalizadas Familia</h3>
+            <div class="product-card__footer">
+              <p class="product-card__price">S/ 215 <small>3 pzas aprox</small></p>
+              <button class="product-card__wishlist" title="Favorito">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NOSOTROS ===== -->
+  <section class="nosotros-section" id="nosotros">
+    <div class="container">
+      <div class="nosotros__grid">
+
+        <div class="nosotros__text-col">
+          <p class="nosotros__tag">Sobre Nosotros</p>
+          <h2 class="nosotros__title">Moda con<br><em>identidad</em><br>propia</h2>
+          <p class="nosotros__text">En G&M creemos que la moda no solo es ropa, sino una forma de expresar tu personalidad. Nuestra misión es ofrecer prendas modernas, elegantes y accesibles, pensadas para realzar tu estilo en cada ocasión.</p>
+          <p class="nosotros__text">Cada colección está diseñada con pasión, cuidando cada detalle para que te sientas único(a) y seguro(a) mientras luces tus outfits favoritos.</p>
+          <div class="nosotros__actions">
+            <a href="/guiselmode/html/productos.html" class="btn-primary">Ver Productos</a>
+            <a href="/guiselmode/html/nosotros.html" class="btn-outline">Leer más</a>
+          </div>
+        </div>
+
+        <div class="nosotros__img-wrap">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Sobre Nosotros G&M" loading="lazy" />
+          <div class="nosotros__img-accent"></div>
+          <div class="nosotros__stats">
+            <div>
+              <p class="nosotros__stat-num">500+</p>
+              <p class="nosotros__stat-label">Clientes</p>
+            </div>
+            <div>
+              <p class="nosotros__stat-num">3+</p>
+              <p class="nosotros__stat-label">Años</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

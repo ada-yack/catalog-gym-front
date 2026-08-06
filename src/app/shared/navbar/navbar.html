@@ -1,0 +1,63 @@
+<nav class="navbar" [class.scrolled]="scrolled" id="navbar">
+
+  <div class="navbar__inner">
+
+    <!-- LOGO -->
+    <a routerLink="/" class="navbar__logo">
+      G<span>&</span>M
+    </a>
+
+
+    <!-- MENU MOBILE -->
+    <button class="navbar__hamburger" [class.active]="menuOpen"
+(click)="toggleMenu()" >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+
+    <!-- LINKS -->
+    <ul class="navbar__nav" [class.open]="menuOpen">
+
+      <li>
+        <a routerLink="/productos" (click)="closeMenu()">
+          Productos
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/nosotros" (click)="closeMenu()">
+          Nosotros
+        </a>
+      </li>
+
+    </ul>
+
+
+    <!-- ACCIONES -->
+    <div class="navbar__actions">
+
+      <button class="navbar__action-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Buscar</span>
+      </button>
+
+
+      <button class="navbar__action-btn">
+        <i class="fa-regular fa-user"></i>
+        <span>Cuenta</span>
+      </button>
+
+
+      <button class="navbar__action-btn accent">
+        <i class="fa-regular fa-heart"></i>
+        <span>Fav</span>
+      </button>
+
+    </div>
+
+
+  </div>
+
+</nav>
