@@ -1,1 +1,200 @@
-<p>modal works!</p>
+<div class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+
+    <!-- HEADER -->
+    <div class="modal__header">
+      <div>
+        <span class="modal__tag">ADMINISTRACIÓN</span>
+        <h2>
+          {{ producto ? 'Editar' : 'Nuevo' }}
+        <em>producto</em>
+        </h2>
+      </div>
+      <button type="button" class="modal__cerrar" (click)="cerrarModal()">×</button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="modal__contenido">
+
+      <!-- TÍTULO -->
+      <div class="form-group">
+        <label for="titulo">Título <span>*</span></label>
+        <input
+          id="titulo"
+          type="text"
+          [(ngModel)]="titulo"
+          placeholder="Ej: Polo Bordado Clásico"
+        >
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          [(ngModel)]="descripcion"
+          placeholder="Breve descripción del producto..."
+          rows="3"
+        ></textarea>
+      </div>
+
+      <!-- ADICIONAL -->
+      <div class="form-group">
+        <label for="adicional">Adicional</label>
+        <input
+          id="adicional"
+          type="text"
+          [(ngModel)]="adicional"
+          placeholder="Color, edición, nota extra..."
+        >
+      </div>
+
+      <!-- PRECIOS -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="precioUnidad">Precio unidad <span>*</span></label>
+          <input
+            id="precioUnidad"
+            type="number"
+            min="0"
+            step="0.01"
+            [(ngModel)]="precioUnidad"
+            placeholder="59.90"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="precioTotal">Precio total</label>
+          <input
+            id="precioTotal"
+            type="number"
+            min="0"
+            step="0.01"
+            [(ngModel)]="precioTotal"
+            placeholder="110.00"
+          >
+        </div>
+      </div>
+
+      <!-- CATEGORÍA -->
+      <div class="form-group">
+        <label for="categoria">Categoría <span>*</span></label>
+        <select id="categoria" [(ngModel)]="categoriaId">
+          <option [ngValue]="null">Seleccionar categoría...</option>
+          @for (categoria of categorias; track categoria.id) {
+            <option [ngValue]="categoria.id">
+              {{ categoria.nombre }}
+            </option>
+          }
+        </select>
+      </div>
+
+   <!-- TALLAS -->
+<div class="form-group">
+<div class="tallas-header">
+
+  <label>Tallas disponibles</label>
+
+  <button
+    type="button"
+    class="btn-seleccionar-todas"
+    (click)="seleccionarTodasLasTallas()"
+  >
+    {{ todasLasTallasSeleccionadas() ? 'Deseleccionar todas' : 'Seleccionar todas' }}
+  </button>
+
+</div>
+
+<div class="tallas-list">
+
+  @for (talla of tallas; track talla.id) {
+
+    <button
+      type="button"
+      class="talla-item"
+      [class.seleccionada]="
+        tallasSeleccionadas.some(
+          t => t.tallaId === talla.id
+        )
+      "
+      (click)="seleccionarTalla(talla.id)"
+    >
+
+      <span class="talla-nombre">
+        {{ talla.nombre }}
+      </span>
+
+      @if (
+        tallasSeleccionadas.some(
+          t => t.tallaId === talla.id
+        )
+      ) {
+        <span class="talla-check">✓</span>
+      }
+
+    </button>
+
+  }
+
+</div>
+
+</div>
+
+      <!-- IMÁGENES -->
+      <div class="form-group">
+        <label>Imágenes del producto</label>
+
+        <input
+          #inputImagenes
+          type="file"
+          accept="image/*"
+          multiple
+          (change)="seleccionarImagen($event)"
+        >
+
+        <small>Máximo 3 imágenes.</small>
+      </div>
+
+      @if (imagenesSeleccionadas.length > 0) {
+        <div class="imagenes-preview">
+          @for (imagen of imagenesSeleccionadas; track $index) {
+            <div class="imagen-preview" [class.principal]="imagen.esPrincipal">
+              <img [src]="imagen.preview" [alt]="imagen.archivo.name">
+
+              @if (imagen.esPrincipal) {
+                <span class="badge-principal">Principal</span>
+              }
+
+              <div class="imagen-actions">
+                @if (!imagen.esPrincipal) {
+                  <button type="button" (click)="hacerPrincipal($index)">
+                    Hacer principal
+                  </button>
+                }
+                <button type="button" class="btn-eliminar" (click)="eliminarImagen($index)">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="modal__footer">
+      <button type="button" class="btn-outline" (click)="cerrarModal()">
+        Cancelar
+      </button>
+      <button
+  type="button"
+  class="btn-primary"
+  (click)="guardarProducto()"
+>
+  {{ producto ? 'Guardar cambios' : 'Guardar producto' }}
+</button>
+    </div>
+
+  </div>
+</div>

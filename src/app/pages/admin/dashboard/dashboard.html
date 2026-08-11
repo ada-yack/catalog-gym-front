@@ -1,1 +1,176 @@
-<p>dashboard works!</p>
+<div
+  class="dashboard"
+  [class.menu-abierto]="menuAbierto()"
+>
+
+  <!-- =========================
+       SIDEBAR
+       ========================= -->
+  <aside class="dashboard__sidebar">
+
+    <!-- CABECERA DEL SIDEBAR -->
+    <div class="sidebar__header">
+
+      <div class="sidebar__brand">
+        <span class="sidebar__brand-small">
+          ADA
+        </span>
+
+        <span class="sidebar__brand-name">
+          ADMIN
+        </span>
+      </div>
+
+      <!-- BOTÓN CERRAR -->
+      <button
+        type="button"
+        class="sidebar__toggle"
+        (click)="toggleMenu()"
+        aria-label="Cerrar menú"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+    </div>
+
+
+    <!-- NAVEGACIÓN -->
+    <nav class="sidebar__nav">
+
+      <span class="sidebar__section">
+        Administración
+      </span>
+
+
+      <!-- INICIO -->
+      <a
+        routerLink="/admin"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="sidebar__link"
+        (click)="cerrarMenu()"
+      >
+        <i class="fa-solid fa-house"></i>
+
+        <span>
+          Inicio
+        </span>
+      </a>
+
+
+      <!-- PRODUCTOS -->
+      <a
+        routerLink="/admin/productos"
+        routerLinkActive="active"
+        class="sidebar__link"
+        (click)="cerrarMenu()"
+      >
+        <i class="fa-solid fa-shirt"></i>
+
+        <span>
+          Productos
+        </span>
+      </a>
+
+
+      <!-- CATEGORÍAS -->
+      <a
+        routerLink="/admin/categorias"
+        routerLinkActive="active"
+        class="sidebar__link"
+        (click)="cerrarMenu()"
+      >
+        <i class="fa-solid fa-layer-group"></i>
+
+        <span>
+          Categorías
+        </span>
+      </a>
+
+
+      <!-- TALLAS -->
+      <a
+        routerLink="/admin/tallas"
+        routerLinkActive="active"
+        class="sidebar__link"
+        (click)="cerrarMenu()"
+      >
+        <i class="fa-solid fa-ruler-horizontal"></i>
+
+        <span>
+          Tallas
+        </span>
+      </a>
+
+
+      <!-- EMPLEADOS -->
+      <a
+        routerLink="/admin/empleados"
+        routerLinkActive="active"
+        class="sidebar__link"
+        (click)="cerrarMenu()"
+      >
+        <i class="fa-solid fa-users"></i>
+
+        <span>
+          Empleados
+        </span>
+      </a>
+
+    </nav>
+
+
+    <!-- PARTE INFERIOR -->
+    <div class="sidebar__footer">
+
+      <div class="sidebar__status">
+        <span class="status__dot"></span>
+
+        <span>
+          Sistema activo
+        </span>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       BOTÓN ABRIR
+       ========================= -->
+  <button
+    type="button"
+    class="dashboard__open"
+    [class.visible]="!menuAbierto()"
+    (click)="toggleMenu()"
+    aria-label="Abrir menú"
+  >
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+
+  <!-- =========================
+       CONTENIDO
+       ========================= -->
+  <main class="dashboard__content">
+
+    <div class="dashboard__content-inner">
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       OVERLAY MOBILE
+       ========================= -->
+  <div
+    class="dashboard__overlay"
+    [class.visible]="menuAbierto()"
+    (click)="cerrarMenu()"
+  ></div>
+
+</div>

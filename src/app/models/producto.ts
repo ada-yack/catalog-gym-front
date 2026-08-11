@@ -1,20 +1,19 @@
 
 
 export interface Producto {
-
- id:number;
- titulo:string;
- descripcion:string;
- adicional:string;
- precioUnidad:number;
- precioTotal:number;
- categoria:string;
-
- tallas:any[];
- imagenes:any[];
-
+  id: number;
+  titulo: string;
+  descripcion: string;
+  adicional?: string;
+  precioUnidad: number;
+  precioTotal?: number;
+  categoriaId: number;
+  categoria: string;
+  activo: boolean;
+  tallas?: Talla[];
+  imagenes?: Imagen[];
 }
-/*
+
 export interface Talla {
 
   id: number;
@@ -24,10 +23,10 @@ export interface Talla {
 }
 
 
-export interface ImagenProducto {
+export interface Imagen {
 
   id: number;
   url: string;
   esPrincipal: boolean;
 
-}*/
+}

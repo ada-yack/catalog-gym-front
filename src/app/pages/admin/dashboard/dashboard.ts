@@ -1,9 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet
+  ],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  styleUrl: './dashboard.css'
 })
-export class Dashboard {}
+export class Dashboard {
+
+  menuAbierto = signal(false);
+
+  toggleMenu(): void {
+    this.menuAbierto.update(abierto => !abierto);
+  }
+
+  cerrarMenu(): void {
+    this.menuAbierto.set(false);
+  }
+}

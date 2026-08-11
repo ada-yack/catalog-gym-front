@@ -1,1 +1,322 @@
-<p>productos works!</p>
+<div class="admin-productos__heading">
+
+  <span class="admin-productos__tag">
+    ADMINISTRACIÓN
+  </span>
+
+  <h1>
+    Gestionar <em>Productos</em>
+  </h1>
+
+  <p>
+    Administra los productos disponibles en el catálogo.
+  </p>
+
+</div>
+
+
+<button
+  type="button"
+  class="btn-nuevo"
+  (click)="abrirCrear()"
+>
+  <span>+</span>
+  Nuevo producto
+</button>
+
+
+<!-- ============================= -->
+<!-- CARGANDO -->
+<!-- ============================= -->
+
+@if (cargando()) {
+
+  <div class="estado">
+
+    <div class="loader"></div>
+
+    <p>
+      Cargando productos...
+    </p>
+
+  </div>
+
+}
+
+
+<!-- ============================= -->
+<!-- ERROR -->
+<!-- ============================= -->
+
+@if (error()) {
+
+  <div class="estado estado--error">
+
+    <p>
+      No se pudieron cargar los productos.
+    </p>
+
+    <button
+      type="button"
+      (click)="cargarProductos()"
+    >
+      Reintentar
+    </button>
+
+  </div>
+
+}
+
+
+<!-- ============================= -->
+<!-- PRODUCTOS -->
+<!-- ============================= -->
+
+@if (!cargando() && !error()) {
+
+  @if (productos().length === 0) {
+
+    <div class="estado">
+
+      <p>
+        No hay productos registrados.
+      </p>
+
+      <button
+        type="button"
+        class="btn-nuevo"
+        (click)="abrirCrear()"
+      >
+        <span>+</span>
+        Crear primer producto
+      </button>
+
+    </div>
+
+  } @else {
+
+    <div class="productos-categorias">
+
+      @for (
+        grupo of productosPorCategoria() | keyvalue;
+        track grupo.key
+      ) {
+
+        <section class="categoria-seccion">
+
+          <!-- ============================= -->
+          <!-- CABECERA CATEGORÍA -->
+          <!-- ============================= -->
+
+          <div class="categoria-seccion__heading">
+
+            <div>
+
+              <span class="categoria-seccion__tag">
+                CATEGORÍA
+              </span>
+
+              <h2>
+                {{ grupo.key }}
+              </h2>
+
+            </div>
+
+            <span class="categoria-seccion__cantidad">
+              {{ grupo.value.length }}
+              {{ grupo.value.length === 1 ? 'producto' : 'productos' }}
+            </span>
+
+          </div>
+
+
+          <!-- ============================= -->
+          <!-- PRODUCTOS -->
+          <!-- ============================= -->
+
+          <div class="productos-grid">
+
+            @for (
+              producto of grupo.value;
+              track producto.id
+            ) {
+
+              <article
+                class="producto-card"
+                [class.producto-card--inactivo]="!producto.activo"
+                (click)="abrirEditar(producto)"
+              >
+
+                <!-- ======================= -->
+                <!-- IMAGEN -->
+                <!-- ======================= -->
+
+                <div class="producto-card__imagen">
+
+                  @if (producto.imagenes?.[0]?.url) {
+
+                    <img
+                      [src]="producto.imagenes[0].url"
+                      [alt]="producto.titulo"
+                    >
+
+                  } @else {
+
+                    <div class="sin-imagen">
+                      Sin imagen
+                    </div>
+
+                  }
+
+
+                  <!-- ESTADO -->
+
+                  <span
+                    class="estado-badge"
+                    [class.estado-badge--inactivo]="!producto.activo"
+                  >
+                    {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                  </span>
+
+                </div>
+
+
+                <!-- ======================= -->
+                <!-- INFORMACIÓN -->
+                <!-- ======================= -->
+
+                <div class="producto-card__contenido">
+
+                  <span class="producto-categoria">
+                    {{ producto.categoria }}
+                  </span>
+
+
+                  <h2>
+                    {{ producto.titulo }}
+                  </h2>
+
+
+                  <p class="producto-descripcion">
+                    {{ producto.descripcion }}
+                  </p>
+
+
+                  <!-- ================= -->
+                  <!-- PRECIOS -->
+                  <!-- ================= -->
+
+                  <div class="producto-precios">
+
+                    <div class="precio-item">
+
+                      <span>
+                        Unidad
+                      </span>
+
+                      <strong>
+                        S/
+                        {{ producto.precioUnidad | number:'1.2-2' }}
+                      </strong>
+
+                    </div>
+
+
+                    @if (
+                      producto.precioTotal !== undefined &&
+                      producto.precioTotal !== null
+                    ) {
+
+                      <div class="precio-separador"></div>
+
+                      <div class="precio-item">
+
+                        <span>
+                          Conjunto
+                        </span>
+
+                        <strong>
+                          S/
+                          {{ producto.precioTotal | number:'1.2-2' }}
+                        </strong>
+
+                      </div>
+
+                    }
+
+                  </div>
+
+
+                  <!-- ================= -->
+                  <!-- ACCIONES -->
+                  <!-- ================= -->
+
+                  <div
+                    class="producto-acciones"
+                    (click)="$event.stopPropagation()"
+                  >
+
+                    <button
+                      type="button"
+                      class="btn-editar"
+                      (click)="abrirEditar(producto)"
+                    >
+                      Editar
+                    </button>
+
+
+                    @if (producto.activo) {
+
+                      <button
+                        type="button"
+                        class="btn-desactivar"
+                        (click)="desactivarProducto(producto)"
+                      >
+                        Desactivar
+                      </button>
+
+                    } @else {
+
+                      <button
+                        type="button"
+                        class="btn-activar"
+                        (click)="activarProducto(producto)"
+                      >
+                        Activar
+                      </button>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        </section>
+
+      }
+
+    </div>
+
+  }
+
+}
+
+
+<!-- ============================= -->
+<!-- MODAL -->
+<!-- ============================= -->
+@if (modalAbierto()) {
+
+  <app-modal
+    [producto]="productoSeleccionado()"
+    (cerrar)="cerrarModal()"
+    (guardado)="productoGuardado()"
+  />
+
+}
