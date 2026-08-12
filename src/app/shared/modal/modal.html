@@ -159,7 +159,7 @@
         <div class="imagenes-preview">
           @for (imagen of imagenesSeleccionadas; track $index) {
             <div class="imagen-preview" [class.principal]="imagen.esPrincipal">
-              <img [src]="imagen.preview" [alt]="imagen.archivo.name">
+              <img [src]="imagen.preview" [alt]="imagen.archivo?.name ?? 'Imagen del producto'">
 
               @if (imagen.esPrincipal) {
                 <span class="badge-principal">Principal</span>

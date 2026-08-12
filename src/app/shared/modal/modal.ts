@@ -46,11 +46,14 @@ export class Modal implements OnInit {
 
   tallasSeleccionadas: { tallaId: number; stock: number }[] = [];
 
-  imagenesSeleccionadas: {
-    archivo: File;
-    preview: string;
-    esPrincipal: boolean;
-  }[] = [];
+imagenesSeleccionadas: {
+  id?: number;
+  archivo?: File;
+  preview: string;
+  url?: string;
+  publicId?: string;
+  esPrincipal: boolean;
+}[] = [];
 
 
 @Input()
@@ -69,7 +72,7 @@ guardado = new EventEmitter<void>();
   }
 
 
-  private cargarDatosProducto(producto: Producto): void {
+private cargarDatosProducto(producto: Producto): void {
 
   this.titulo = producto.titulo;
   this.descripcion = producto.descripcion ?? '';
@@ -79,10 +82,13 @@ guardado = new EventEmitter<void>();
   this.precioTotal = producto.precioTotal ?? null;
 
   this.categoriaId = producto.categoriaId;
- 
-  this.tallasSeleccionadas = (producto.tallas ?? []).map(talla => ({
-  tallaId: talla.id,
-  stock: talla.stock
+
+this.imagenesSeleccionadas = (producto.imagenes ?? []).map(imagen => ({
+  id: imagen.id,
+  preview: imagen.url,
+  url: imagen.url,
+  publicId: imagen.publicId,
+  esPrincipal: imagen.esPrincipal
 }));
 }
   // ===================== CATEGORÍAS =====================
@@ -165,46 +171,56 @@ todasLasTallasSeleccionadas(): boolean {
 }
   // ===================== IMÁGENES =====================
 
-  seleccionarImagen(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (!input.files) return;
+seleccionarImagen(event: Event): void {
+  const input = event.target as HTMLInputElement;
 
-    const archivos = Array.from(input.files);
+  if (!input.files) return;
 
-    if (this.imagenesSeleccionadas.length + archivos.length > 3) {
-      alert('Máximo 3 imágenes por producto.');
-      input.value = '';
-      return;
-    }
+  const archivos = Array.from(input.files);
 
-    for (const archivo of archivos) {
-      const preview = URL.createObjectURL(archivo);
-
-      this.imagenesSeleccionadas.push({
-        archivo,
-        preview,
-        esPrincipal: this.imagenesSeleccionadas.length === 0
-      });
-    }
-
+  if (this.imagenesSeleccionadas.length + archivos.length > 3) {
+    alert('Máximo 3 imágenes por producto.');
     input.value = '';
+    return;
   }
 
-  eliminarImagen(index: number): void {
-    const imagen = this.imagenesSeleccionadas[index];
-    if (!imagen) return;
+  for (const archivo of archivos) {
 
+    const preview = URL.createObjectURL(archivo);
+
+    this.imagenesSeleccionadas.push({
+      archivo,
+      preview,
+      esPrincipal: this.imagenesSeleccionadas.length === 0
+    });
+  }
+
+  input.value = '';
+}
+
+ eliminarImagen(index: number): void {
+
+  const imagen = this.imagenesSeleccionadas[index];
+
+  if (!imagen) return;
+
+  // Solo liberar memoria si es una preview creada
+  // mediante URL.createObjectURL()
+  if (imagen.archivo) {
     URL.revokeObjectURL(imagen.preview);
-    this.imagenesSeleccionadas.splice(index, 1);
-
-    // Si se eliminó la principal, hacemos principal la primera restante
-    if (
-      this.imagenesSeleccionadas.length > 0 &&
-      !this.imagenesSeleccionadas.some(img => img.esPrincipal)
-    ) {
-      this.imagenesSeleccionadas[0].esPrincipal = true;
-    }
   }
+
+  this.imagenesSeleccionadas.splice(index, 1);
+
+  // Si eliminamos la principal,
+  // hacemos principal la primera restante
+  if (
+    this.imagenesSeleccionadas.length > 0 &&
+    !this.imagenesSeleccionadas.some(img => img.esPrincipal)
+  ) {
+    this.imagenesSeleccionadas[0].esPrincipal = true;
+  }
+}
 
   hacerPrincipal(index: number): void {
     this.imagenesSeleccionadas.forEach((imagen, i) => {
@@ -231,27 +247,38 @@ todasLasTallasSeleccionadas(): boolean {
       return;
     }
 
-    // Subir imágenes a Cloudinary
-    const imagenes: ImagenCreate[] = [];
+    // ==========================================
+// PROCESAR IMÁGENES
+// ==========================================
 
-    try {
-      for (const imagen of this.imagenesSeleccionadas) {
-        console.log('Subiendo imagen:', imagen.archivo.name);
+const imagenes: any[] = [];
 
-        const resultado = await this.subirCloudinary(imagen.archivo);
+for (const imagen of this.imagenesSeleccionadas) {
 
-        imagenes.push({
-          url: resultado.url,
-          publicId: resultado.publicId,
-          esPrincipal: imagen.esPrincipal
-        });
-      }
-    } catch (error) {
-      console.error('Error subiendo imágenes:', error);
-      alert('No se pudieron subir las imágenes.');
-      return;
-    }
+  // Imagen existente
+  if (imagen.id) {
 
+    imagenes.push({
+      id: imagen.id,
+      url: imagen.url,
+      publicId: imagen.publicId,
+      esPrincipal: imagen.esPrincipal
+    });
+
+  }
+
+  // Imagen nueva
+  else if (imagen.archivo) {
+
+    const resultado = await this.subirCloudinary(imagen.archivo);
+
+    imagenes.push({
+      url: resultado.url,
+      publicId: resultado.publicId,
+      esPrincipal: imagen.esPrincipal
+    });
+  }
+}
     // DTO
     const producto: ProductoCreate = {
       titulo: this.titulo.trim(),
@@ -272,15 +299,16 @@ todasLasTallasSeleccionadas(): boolean {
 
 if (this.producto) {
 
-  const cambios = {
-    titulo: producto.titulo,
-    descripcion: producto.descripcion,
-    adicional: producto.adicional,
-    precioUnidad: producto.precioUnidad,
-    precioTotal: producto.precioTotal,
-    categoriaId: producto.categoriaId,
-    tallas: producto.tallas
-  };
+const cambios = {
+  titulo: producto.titulo,
+  descripcion: producto.descripcion,
+  adicional: producto.adicional,
+  precioUnidad: producto.precioUnidad,
+  precioTotal: producto.precioTotal,
+  categoriaId: producto.categoriaId,
+  tallas: producto.tallas,
+  imagenes: imagenes
+};
 
   this.productoService
     .actualizarProducto(this.producto.id, cambios)

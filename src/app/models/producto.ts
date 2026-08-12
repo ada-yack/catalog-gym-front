@@ -24,9 +24,8 @@ export interface Talla {
 
 
 export interface Imagen {
-
   id: number;
   url: string;
+  publicId: string;
   esPrincipal: boolean;
-
 }
