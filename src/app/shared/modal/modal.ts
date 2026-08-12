@@ -1,13 +1,13 @@
 import { Component, EventEmitter,Input, Output, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { CategoriaService } from '../../services/categoria';
+import { CategoriaService } from '../../core/services/categoria';
 import { Categoria } from '../../models/categoria';
 
 import { ProductoCreate } from '../../models/producto-create';
-import { ProductoService } from '../../services/producto';
+import { ProductoService } from '../../core/services/producto';
 
-import { TallaService } from '../../services/talla';
+import { TallaService } from '../../core/services/talla';
 import { Talla } from '../../models/Talla';
 
 import { ImagenCreate } from '../../models/imagen-create';

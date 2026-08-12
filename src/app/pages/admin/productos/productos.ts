@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductoService } from '../../../services/producto';
+import { ProductoService } from '../../../core/services/producto';
 import { Producto } from '../../../models/producto';
 import { Modal } from '../../../shared/modal/modal'; 
 
