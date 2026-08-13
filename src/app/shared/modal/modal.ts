@@ -83,13 +83,19 @@ private cargarDatosProducto(producto: Producto): void {
 
   this.categoriaId = producto.categoriaId;
 
-this.imagenesSeleccionadas = (producto.imagenes ?? []).map(imagen => ({
-  id: imagen.id,
-  preview: imagen.url,
-  url: imagen.url,
-  publicId: imagen.publicId,
-  esPrincipal: imagen.esPrincipal
-}));
+  this.imagenesSeleccionadas = (producto.imagenes ?? []).map(imagen => ({
+    id: imagen.id,
+    preview: imagen.url,
+    url: imagen.url,
+    publicId: imagen.publicId,
+    esPrincipal: imagen.esPrincipal
+  }));
+
+  // 👇 AGREGAR ESTO
+  this.tallasSeleccionadas = (producto.tallas ?? []).map(talla => ({
+    tallaId: talla.id,
+    stock: talla.stock
+  }));
 }
   // ===================== CATEGORÍAS =====================
 
@@ -108,7 +114,7 @@ this.imagenesSeleccionadas = (producto.imagenes ?? []).map(imagen => ({
   // ===================== TALLAS =====================
 
   cargarTallas(): void {
-    this.tallaService.listarTallas().subscribe({
+    this.tallaService.listTallas().subscribe({
       next: (tallas) => {
         console.log('Tallas recibidas:', tallas);
         this.tallas = tallas;

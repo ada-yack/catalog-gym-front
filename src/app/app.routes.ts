@@ -7,6 +7,10 @@ import { Dashboard } from './pages/admin/dashboard/dashboard';
 import { Productos as ProductosAdmin } from './pages/admin/productos/productos';
 
 import { Login } from './pages/usuario/login/login';
+import { Registro } from './pages/usuario/registro/registro';
+import { adminGuard } from './core/guards/admin-guard';
+import { Tallas } from './pages/admin/tallas/tallas';
+
 
 export const routes: Routes = [
 
@@ -28,6 +32,11 @@ export const routes: Routes = [
     path: 'login',
     component: Login
   },
+  
+  {
+  path: 'registro',
+  component: Registro
+},
 
 
 
@@ -38,11 +47,16 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: Dashboard,
+    canActivate: [adminGuard],
     children: [
 
       {
         path: 'productos',
         component: ProductosAdmin
+      },
+      {
+        path: 'tallas',
+        component: Tallas
       }
 
       // Más adelante:

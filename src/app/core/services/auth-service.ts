@@ -2,6 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
+import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+
+import { auth } from '../firebase/firebase.config';
+
 import { LoginUsuario } from '../../models/auth/login-usuario';
 import { RegistroUsuario } from '../../models/auth/registro-usuario';
 import { LoginResponse } from '../../models/auth/login-response';
@@ -123,4 +127,29 @@ export class AuthService {
 
   }
 
+ loginConGoogle(): void {
+
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider)
+    .then(async (resultado) => {
+
+      const usuario = resultado.user;
+
+      const tokenFirebase = await usuario.getIdToken();
+
+      console.log('========================');
+      console.log('GOOGLE FUNCIONA ✅');
+      console.log('Email:', usuario.email);
+      console.log('Nombre:', usuario.displayName);
+      console.log('Token Firebase:', tokenFirebase);
+      console.log('========================');
+
+    })
+    .catch((error) => {
+
+      console.error('Error con Google:', error);
+
+    });
+}
 }

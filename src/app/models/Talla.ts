@@ -1,4 +1,7 @@
-export interface Talla {
+ export interface Talla {
+
   id: number;
+
   nombre: string;
+
 }

@@ -1,111 +1,251 @@
-<div class="login">
+<div class="login-page">
 
-  <div class="login__container">
+  <!-- ==========================================
+       USUARIO NO LOGUEADO
+       ========================================== -->
 
-    <div class="login__heading">
+  @if (!usuario) {
 
-      <span class="login__tag">
-        BIENVENIDO
-      </span>
+    <div class="login-card">
 
-      <h1>
-        Iniciar <em>Sesión</em>
-      </h1>
+      <div class="login-card__header">
 
-      <p>
-        Ingresa a tu cuenta para continuar.
+        <span class="login-card__tag">
+          BIENVENIDO
+        </span>
+
+        <h1>
+          Iniciar <em>Sesión</em>
+        </h1>
+
+        <p>
+          Ingresa a tu cuenta para continuar.
+        </p>
+
+      </div>
+
+
+      <form
+        class="login-form"
+        (ngSubmit)="iniciarSesion()"
+      >
+
+        <!-- EMAIL -->
+
+        <div class="login-field">
+
+          <label for="email">
+            Correo electrónico
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="correo@ejemplo.com"
+            autocomplete="email"
+          >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="login-field">
+
+          <label for="password">
+            Contraseña
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          >
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        @if (error) {
+
+          <p class="login-error">
+            {{ error }}
+          </p>
+
+        }
+
+
+        <!-- LOGIN -->
+
+        <button
+          class="login-button"
+          type="submit"
+          [disabled]="cargando"
+        >
+
+          @if (cargando) {
+            Iniciando sesión...
+          } @else {
+            Iniciar sesión
+          }
+
+        </button>
+
+      </form>
+
+
+      <!-- SEPARADOR -->
+
+      <div class="login-divider">
+
+        <span></span>
+
+        <p>o continúa con</p>
+
+        <span></span>
+
+      </div>
+
+
+      <!-- GOOGLE -->
+
+      <button
+        class="google-button"
+        type="button"
+        (click)="loginGoogle()"
+      >
+
+        <span class="google-icon">
+          G
+        </span>
+
+        Continuar con Google
+
+      </button>
+
+
+      <p class="login-register">
+
+        ¿No tienes una cuenta?
+
+       <button type="button"(click)="irRegistro()">
+  Regístrate
+</button>
+
       </p>
 
     </div>
 
+  }
 
-    <form
-      class="login__form"
-      (ngSubmit)="iniciarSesion()"
-    >
 
-      <!-- EMAIL -->
+  <!-- ==========================================
+       USUARIO YA LOGUEADO
+       ========================================== -->
 
-      <div class="login__field">
+  @if (usuario) {
 
-        <label for="email">
-          Correo electrónico
-        </label>
+    <div class="account-panel">
 
-        <input
-          id="email"
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="correo@ejemplo.com"
-          autocomplete="email"
+      <div class="account-panel__top">
+
+        <span class="account-panel__tag">
+          MI CUENTA
+        </span>
+
+        <button
+          class="account-panel__close"
+          type="button"
+          (click)="irProductos()"
         >
+          ×
+        </button>
 
       </div>
 
 
-      <!-- PASSWORD -->
+      <!-- AVATAR -->
 
-      <div class="login__field">
+      <div class="account-avatar">
 
-        <label for="password">
-          Contraseña
-        </label>
-
-        <input
-          id="password"
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          placeholder="••••••••"
-          autocomplete="current-password"
-        >
+        {{ usuario.nombre.charAt(0).toUpperCase() }}
 
       </div>
 
 
-      <!-- ERROR -->
+      <!-- INFORMACIÓN -->
 
-      @if (error) {
+      <div class="account-info">
 
-        <p class="login__error">
-          {{ error }}
+        <h2>
+          {{ usuario.nombre }}
+        </h2>
+
+        <p>
+          {{ usuario.email }}
         </p>
 
-      }
+        <span class="account-role">
+          {{ usuario.rol }}
+        </span>
+
+      </div>
 
 
-      <!-- BOTÓN -->
+      <!-- OPCIONES -->
 
-      <button
-        type="submit"
-        [disabled]="cargando"
-      >
+      <div class="account-actions">
 
-        @if (cargando) {
-          Iniciando sesión...
-        } @else {
-          Iniciar sesión
+        <button
+          type="button"
+          (click)="irProductos()"
+        >
+
+          <span>🛍</span>
+
+          Ver productos
+
+        </button>
+
+
+        @if (usuario.rol === 'ADMIN') {
+
+          <button
+            type="button"
+            (click)="irAdmin()"
+          >
+
+            <span>⚙</span>
+
+            Panel de administración
+
+          </button>
+
         }
 
-      </button>
-
-    </form>
+      </div>
 
 
-    <!-- GOOGLE LO DEJAMOS PARA DESPUÉS -->
-
-    <div class="login__google">
+      <!-- LOGOUT -->
 
       <button
+        class="logout-button"
         type="button"
-        disabled
+        (click)="cerrarSesion()"
       >
-        Continuar con Google
+
+        Cerrar sesión
+
       </button>
 
     </div>
 
-  </div>
+  }
 
 </div>

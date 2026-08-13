@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/services/auth-service';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
 
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -25,6 +25,23 @@ export class Login {
   cargando = false;
   error = '';
 
+  // ==========================================
+  // USUARIO
+  // ==========================================
+
+  usuario: any = null;
+
+  ngOnInit(): void {
+
+    if (this.authService.estaAutenticado()) {
+
+      this.usuario = this.authService.obtenerUsuario();
+
+      console.log('Usuario ya autenticado:', this.usuario);
+
+    }
+
+  }
 
   // ==========================================
   // LOGIN
@@ -53,8 +70,15 @@ export class Login {
 
         this.cargando = false;
 
-        // Por ahora vamos al inicio
-        this.router.navigate(['/']);
+        if (respuesta.usuario.rol === 'ADMIN') {
+
+          this.router.navigate(['/admin/productos']);
+
+        } else {
+
+          this.router.navigate(['/']);
+
+        }
 
       },
 
@@ -74,4 +98,46 @@ export class Login {
 
     });
   }
+
+  // ==========================================
+  // CERRAR SESIÓN
+  // ==========================================
+
+  cerrarSesion(): void {
+
+    this.authService.logout();
+
+    this.usuario = null;
+
+    this.email = '';
+    this.password = '';
+
+    this.router.navigate(['/']);
+
+  }
+
+  // ==========================================
+  // NAVEGACIÓN
+  // ==========================================
+
+  irProductos(): void {
+
+    this.router.navigate(['/productos']);
+
+  }
+
+  irAdmin(): void {
+
+    this.router.navigate(['/admin/productos']);
+
+  }
+
+  irRegistro(): void {
+  this.router.navigate(['/registro']);
+}
+
+loginGoogle(): void {
+  this.authService.loginConGoogle();
+}
+
 }

@@ -1,0 +1,164 @@
+<div class="tallas-page">
+
+  <section class="tallas-heading">
+    <span class="tallas-tag">ADMINISTRACIÓN</span>
+
+    <h1>
+      Gestionar <em>Tallas</em>
+    </h1>
+
+    <p>
+      Administra las tallas disponibles para los productos deportivos del Gimnasio ADA.
+    </p>
+  </section>
+
+
+  <section class="admin-card">
+
+    <div class="card-heading">
+      <div>
+        <span class="card-label">CATÁLOGO</span>
+        <h2>Nueva talla</h2>
+      </div>
+    </div>
+
+    <form class="talla-form" (ngSubmit)="crear()">
+
+      <div class="form-group">
+
+        <label for="nombreTalla">
+          Nombre de la talla
+        </label>
+
+        <input
+          id="nombreTalla"
+          type="text"
+          class="custom-input"
+          placeholder="Ej. S, M, L, XL"
+          [(ngModel)]="nuevaTallaNombre"
+          name="nuevaTallaNombre"
+          maxlength="10"
+          required
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!nuevaTallaNombre.trim()"
+      >
+        + AGREGAR TALLA
+      </button>
+
+    </form>
+
+  </section>
+
+
+  <section class="admin-card">
+
+    <div class="card-heading">
+
+      <div>
+        <span class="card-label">CATÁLOGO ACTUAL</span>
+
+        <h2>
+          Listado de tallas
+          <span class="count">
+            {{ tallas.length }}
+          </span>
+        </h2>
+      </div>
+
+      <button
+        type="button"
+        class="btn-outline"
+        (click)="cargarTallas()"
+      >
+        ↻ REFRESCAR
+      </button>
+
+    </div>
+
+
+    <!-- CARGANDO -->
+    <div
+      *ngIf="cargando"
+      class="status-box"
+    >
+      Cargando tallas...
+    </div>
+
+
+    <!-- ERROR -->
+    <div
+      *ngIf="mensajeError"
+      class="status-box error"
+    >
+      {{ mensajeError }}
+    </div>
+
+
+    <!-- LISTADO -->
+    <div
+      *ngIf="!cargando && tallas.length > 0"
+      class="table-container"
+    >
+
+      <table class="tallas-table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>TALLA</th>
+            <th>ACCIONES</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let talla of tallas">
+
+            <td class="id-cell">
+              #{{ talla.id }}
+            </td>
+
+            <td>
+              <span class="talla-badge">
+                {{ talla.nombre }}
+              </span>
+            </td>
+
+            <td class="actions-cell">
+
+              <button
+                type="button"
+                class="btn-delete"
+                (click)="eliminar(talla.id)"
+              >
+                🗑 ELIMINAR
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- SIN DATOS -->
+    <div
+      *ngIf="!cargando && tallas.length === 0 && !mensajeError"
+      class="empty-state"
+    >
+      No hay tallas registradas.
+    </div>
+
+  </section>
+
+</div>

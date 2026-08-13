@@ -1,0 +1,562 @@
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.tallas-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 30px 60px;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.tallas-heading {
+  margin-bottom: 35px;
+}
+
+.tallas-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  color: #a8a8a8;
+}
+
+.tallas-heading h1 {
+  margin: 0;
+
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+
+  letter-spacing: -1.5px;
+  color: #ffffff;
+}
+
+.tallas-heading h1 em {
+  font-style: normal;
+  color: #f5c542;
+}
+
+.tallas-heading p {
+  max-width: 650px;
+  margin: 15px 0 0;
+
+  font-size: 15px;
+  line-height: 1.6;
+
+  color: #8d8d8d;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.admin-card {
+  margin-bottom: 25px;
+  padding: 28px;
+
+  background: #111111;
+
+  border: 1px solid #242424;
+  border-radius: 10px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.card-label {
+  display: block;
+  margin-bottom: 6px;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+
+  color: #777777;
+}
+
+.card-heading h2 {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 6px;
+
+  background: rgba(245, 197, 66, 0.1);
+  color: #f5c542;
+
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+.talla-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  color: #999999;
+}
+
+.custom-input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #303030;
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #0b0b0b;
+  color: #ffffff;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.custom-input::placeholder {
+  color: #555555;
+}
+
+.custom-input:focus {
+  border-color: #f5c542;
+  box-shadow: 0 0 0 2px rgba(245, 197, 66, 0.08);
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-primary {
+  height: 46px;
+
+  padding: 0 22px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #f5c542;
+  color: #111111;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #ffd85c;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  height: 38px;
+
+  padding: 0 13px;
+
+  border: 1px solid #303030;
+  border-radius: 5px;
+
+  background: transparent;
+  color: #aaaaaa;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.btn-outline:hover:not(:disabled) {
+  border-color: #f5c542;
+  color: #f5c542;
+}
+
+.btn-outline:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CONTADOR
+   ========================================================= */
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+  height: 24px;
+
+  margin-left: 7px;
+  padding: 0 7px;
+
+  border-radius: 20px;
+
+  background: #242424;
+  color: #f5c542;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tallas-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  color: #ffffff;
+}
+
+.tallas-table thead {
+  border-bottom: 1px solid #292929;
+}
+
+.tallas-table th {
+  padding: 13px 15px;
+
+  text-align: left;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+
+  color: #686868;
+}
+
+.tallas-table td {
+  padding: 17px 15px;
+
+  border-bottom: 1px solid #1e1e1e;
+
+  font-size: 13px;
+
+  color: #d0d0d0;
+}
+
+.tallas-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.tallas-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.tallas-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   ID
+   ========================================================= */
+
+.id-cell {
+  width: 100px;
+
+  font-family: monospace;
+  font-size: 12px !important;
+
+  color: #666666 !important;
+}
+
+
+/* =========================================================
+   BADGE TALLA
+   ========================================================= */
+
+.talla-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 48px;
+  height: 34px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(245, 197, 66, 0.3);
+  border-radius: 5px;
+
+  background: rgba(245, 197, 66, 0.08);
+
+  color: #f5c542;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ACCIONES
+   ========================================================= */
+
+.actions-column {
+  width: 160px;
+  text-align: right !important;
+}
+
+.actions-cell {
+  text-align: right;
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 8px 11px;
+
+  border: 1px solid #303030;
+  border-radius: 5px;
+
+  background: transparent;
+
+  color: #777777;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.btn-delete:hover {
+  border-color: #b84a4a;
+  background: rgba(184, 74, 74, 0.08);
+  color: #e06a6a;
+}
+
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+.status-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 100px;
+
+  border: 1px dashed #292929;
+  border-radius: 6px;
+
+  color: #777777;
+
+  font-size: 13px;
+}
+
+.status-box.error {
+  border-color: rgba(180, 70, 70, 0.35);
+  color: #d66b6b;
+}
+
+.status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: rgba(180, 70, 70, 0.15);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-spinner {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid #333333;
+  border-top-color: #f5c542;
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   SIN DATOS
+   ========================================================= */
+
+.empty-state {
+  padding: 45px 20px;
+
+  text-align: center;
+
+  border: 1px dashed #292929;
+  border-radius: 6px;
+}
+
+.empty-icon {
+  margin-bottom: 12px;
+
+  font-size: 28px;
+  opacity: 0.6;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px;
+
+  font-size: 15px;
+  color: #dddddd;
+}
+
+.empty-state p {
+  margin: 0;
+
+  font-size: 12px;
+  color: #666666;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .tallas-page {
+    padding: 25px 15px 40px;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+
+  .talla-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .list-heading {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .btn-outline {
+    flex-shrink: 0;
+  }
+
+  .tallas-table th,
+  .tallas-table td {
+    padding: 13px 10px;
+  }
+
+  .actions-column {
+    width: auto;
+  }
+
+  .btn-delete {
+    font-size: 0;
+    padding: 8px 10px;
+  }
+
+  .btn-delete span {
+    font-size: 13px;
+  }
+
+}
