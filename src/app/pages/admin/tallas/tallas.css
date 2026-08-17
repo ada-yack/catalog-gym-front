@@ -3,10 +3,10 @@
    ========================================================= */
 
 .tallas-page {
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 30px 60px;
+  padding-bottom: 70px;
 }
 
 
@@ -15,48 +15,41 @@
    ========================================================= */
 
 .tallas-heading {
-  margin-bottom: 35px;
+  margin-bottom: 40px;
 }
 
 .tallas-tag {
   display: inline-block;
   margin-bottom: 12px;
-  padding: 6px 12px;
 
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-
-  color: #a8a8a8;
+  color: var(--accent-red);
 }
 
 .tallas-heading h1 {
-  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.05em;
 
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
-  line-height: 1.05;
-
-  letter-spacing: -1.5px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .tallas-heading h1 em {
+  color: var(--accent-red);
   font-style: normal;
-  color: #f5c542;
 }
 
 .tallas-heading p {
   max-width: 650px;
-  margin: 15px 0 0;
+  margin-top: 16px;
 
-  font-size: 15px;
-  line-height: 1.6;
-
-  color: #8d8d8d;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
 }
 
 
@@ -65,43 +58,60 @@
    ========================================================= */
 
 .admin-card {
-  margin-bottom: 25px;
-  padding: 28px;
+  margin-bottom: 28px;
+  padding: 30px;
 
-  background: #111111;
+  background: var(--bg-card);
 
-  border: 1px solid #242424;
-  border-radius: 10px;
+  border: 1px solid var(--border);
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  position: relative;
 }
+
+.admin-card::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 45px;
+  height: 3px;
+
+  background: var(--accent-red);
+}
+
+
+/* =========================================================
+   ENCABEZADO DE TARJETA
+   ========================================================= */
 
 .card-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .card-label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 
-  color: #777777;
+  color: var(--text-muted);
 }
 
 .card-heading h2 {
-  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
 
-  font-size: 21px;
-  font-weight: 700;
-
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .card-icon {
@@ -109,15 +119,15 @@
   align-items: center;
   justify-content: center;
 
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
 
-  border-radius: 6px;
+  background: rgba(224, 28, 28, 0.08);
+  border: 1px solid rgba(224, 28, 28, 0.25);
 
-  background: rgba(245, 197, 66, 0.1);
-  color: #f5c542;
+  color: var(--accent-red);
 
-  font-size: 22px;
+  font-size: 1.5rem;
 }
 
 
@@ -139,110 +149,56 @@
   display: block;
   margin-bottom: 8px;
 
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 
-  color: #999999;
+  color: var(--text-secondary);
 }
 
 .custom-input {
   width: 100%;
   height: 46px;
 
-  padding: 0 15px;
+  padding: 0 14px;
 
-  box-sizing: border-box;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 
-  border: 1px solid #303030;
-  border-radius: 6px;
+  border: 1px solid var(--border);
 
   outline: none;
 
-  background: #0b0b0b;
-  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
 
-  font-size: 14px;
-
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .custom-input::placeholder {
-  color: #555555;
+  color: var(--text-muted);
 }
 
 .custom-input:focus {
-  border-color: #f5c542;
-  box-shadow: 0 0 0 2px rgba(245, 197, 66, 0.08);
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 2px rgba(224, 28, 28, 0.08);
 }
 
 
 /* =========================================================
-   BOTONES
+   BOTÓN AGREGAR
    ========================================================= */
 
-.btn-primary {
+.talla-form .btn-primary {
   height: 46px;
-
-  padding: 0 22px;
-
-  border: none;
-  border-radius: 6px;
-
-  background: #f5c542;
-  color: #111111;
-
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
+  white-space: nowrap;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: #ffd85c;
-  transform: translateY(-1px);
-}
-
-.btn-primary:disabled {
+.talla-form .btn-primary:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-}
-
-.btn-outline {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  height: 38px;
-
-  padding: 0 13px;
-
-  border: 1px solid #303030;
-  border-radius: 5px;
-
-  background: transparent;
-  color: #aaaaaa;
-
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.btn-outline:hover:not(:disabled) {
-  border-color: #f5c542;
-  color: #f5c542;
-}
-
-.btn-outline:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+  transform: none;
 }
 
 
@@ -255,18 +211,19 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 24px;
-  height: 24px;
+  min-width: 25px;
+  height: 25px;
 
-  margin-left: 7px;
+  margin-left: 8px;
   padding: 0 7px;
 
-  border-radius: 20px;
+  background: var(--accent-red);
 
-  background: #242424;
-  color: #f5c542;
+  color: #fff;
 
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 
@@ -284,37 +241,35 @@
 
   border-collapse: collapse;
 
-  color: #ffffff;
+  font-size: 0.9rem;
 }
 
 .tallas-table thead {
-  border-bottom: 1px solid #292929;
+  border-bottom: 1px solid var(--border);
 }
 
 .tallas-table th {
-  padding: 13px 15px;
+  padding: 14px 16px;
 
   text-align: left;
 
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.3px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
 
-  color: #686868;
+  color: var(--text-muted);
 }
 
 .tallas-table td {
-  padding: 17px 15px;
+  padding: 17px 16px;
 
-  border-bottom: 1px solid #1e1e1e;
+  border-bottom: 1px solid var(--border);
 
-  font-size: 13px;
-
-  color: #d0d0d0;
+  color: var(--text-secondary);
 }
 
 .tallas-table tbody tr {
-  transition: background 0.2s ease;
+  transition: var(--transition);
 }
 
 .tallas-table tbody tr:hover {
@@ -333,10 +288,10 @@
 .id-cell {
   width: 100px;
 
-  font-family: monospace;
-  font-size: 12px !important;
+  color: var(--text-muted) !important;
 
-  color: #666666 !important;
+  font-family: monospace;
+  font-size: 0.78rem;
 }
 
 
@@ -349,21 +304,20 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 48px;
+  min-width: 55px;
   height: 34px;
 
   padding: 0 12px;
 
-  border: 1px solid rgba(245, 197, 66, 0.3);
-  border-radius: 5px;
+  background: rgba(224, 28, 28, 0.08);
 
-  background: rgba(245, 197, 66, 0.08);
+  border: 1px solid rgba(224, 28, 28, 0.25);
 
-  color: #f5c542;
+  color: var(--accent-red);
 
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
 
 
@@ -377,6 +331,7 @@
 }
 
 .actions-cell {
+  width: 160px;
   text-align: right;
 }
 
@@ -385,28 +340,29 @@
   align-items: center;
   gap: 7px;
 
-  padding: 8px 11px;
-
-  border: 1px solid #303030;
-  border-radius: 5px;
+  padding: 8px 12px;
 
   background: transparent;
 
-  color: #777777;
+  border: 1px solid var(--border);
 
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .btn-delete:hover {
-  border-color: #b84a4a;
-  background: rgba(184, 74, 74, 0.08);
-  color: #e06a6a;
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+
+  background: rgba(224, 28, 28, 0.05);
 }
 
 
@@ -418,59 +374,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
   min-height: 100px;
 
-  border: 1px dashed #292929;
-  border-radius: 6px;
+  border: 1px dashed var(--border);
 
-  color: #777777;
+  color: var(--text-secondary);
 
-  font-size: 13px;
+  font-size: 0.85rem;
 }
 
 .status-box.error {
-  border-color: rgba(180, 70, 70, 0.35);
-  color: #d66b6b;
-}
+  color: var(--accent-red);
 
-.status-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 22px;
-  height: 22px;
-
-  border-radius: 50%;
-
-  background: rgba(180, 70, 70, 0.15);
-
-  font-size: 12px;
-  font-weight: 800;
-}
-
-
-/* =========================================================
-   LOADING
-   ========================================================= */
-
-.loading-spinner {
-  width: 15px;
-  height: 15px;
-
-  border: 2px solid #333333;
-  border-top-color: #f5c542;
-  border-radius: 50%;
-
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  border-color: rgba(224, 28, 28, 0.25);
 }
 
 
@@ -479,33 +396,34 @@
    ========================================================= */
 
 .empty-state {
-  padding: 45px 20px;
+  padding: 50px 20px;
 
   text-align: center;
 
-  border: 1px dashed #292929;
-  border-radius: 6px;
+  border: 1px dashed var(--border);
 }
 
 .empty-icon {
   margin-bottom: 12px;
 
-  font-size: 28px;
-  opacity: 0.6;
+  font-size: 2rem;
+
+  opacity: 0.5;
 }
 
 .empty-state h3 {
-  margin: 0 0 8px;
+  margin-bottom: 6px;
 
-  font-size: 15px;
-  color: #dddddd;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+
+  color: var(--text-primary);
 }
 
 .empty-state p {
-  margin: 0;
-
-  font-size: 12px;
-  color: #666666;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
 
@@ -513,32 +431,36 @@
    RESPONSIVE
    ========================================================= */
 
-@media (max-width: 700px) {
-
-  .tallas-page {
-    padding: 25px 15px 40px;
-  }
-
-  .admin-card {
-    padding: 20px;
-  }
+@media (max-width: 800px) {
 
   .talla-form {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .btn-primary {
+  .talla-form .btn-primary {
     width: 100%;
   }
 
-  .list-heading {
-    align-items: flex-start;
+  .card-heading {
     gap: 15px;
   }
 
-  .btn-outline {
-    flex-shrink: 0;
+  .admin-card {
+    padding: 22px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .tallas-page {
+    width: 92%;
+  }
+
+  .tallas-heading h1 {
+    font-size: 3rem;
   }
 
   .tallas-table th,
@@ -546,17 +468,13 @@
     padding: 13px 10px;
   }
 
-  .actions-column {
+  .actions-cell {
     width: auto;
   }
 
   .btn-delete {
+    padding: 8px;
     font-size: 0;
-    padding: 8px 10px;
-  }
-
-  .btn-delete span {
-    font-size: 13px;
   }
 
 }

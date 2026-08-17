@@ -10,6 +10,7 @@ import { Login } from './pages/usuario/login/login';
 import { Registro } from './pages/usuario/registro/registro';
 import { adminGuard } from './core/guards/admin-guard';
 import { Tallas } from './pages/admin/tallas/tallas';
+import {Categorias  } from './pages/admin/categorias/categorias';
 
 
 export const routes: Routes = [
@@ -57,14 +58,11 @@ export const routes: Routes = [
       {
         path: 'tallas',
         component: Tallas
-      }
-
-      // Más adelante:
-      //
-      // {
-      //   path: 'categorias',
-      //   component: Categorias
-      // },
+      },
+      {
+         path: 'categorias',
+        component: Categorias
+      },
       //
       // {
       //   path: 'tallas',

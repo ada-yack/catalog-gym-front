@@ -137,7 +137,10 @@ export class Login implements OnInit {
 }
 
 loginGoogle(): void {
-  this.authService.loginConGoogle();
-}
 
+  console.log('CLICK GOOGLE');
+
+  this.authService.loginConGoogle();
+
+}
 }

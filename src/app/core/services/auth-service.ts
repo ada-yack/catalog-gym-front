@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, from, switchMap } from 'rxjs';
 
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 
@@ -10,6 +10,8 @@ import { LoginUsuario } from '../../models/auth/login-usuario';
 import { RegistroUsuario } from '../../models/auth/registro-usuario';
 import { LoginResponse } from '../../models/auth/login-response';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = '/api/auth';
 
   // ==========================================
   // LOGIN
@@ -127,28 +129,70 @@ export class AuthService {
 
   }
 
- loginConGoogle(): void {
+
+  
+loginConGoogle(): void {
 
   const provider = new GoogleAuthProvider();
 
+  console.log('1. Antes de abrir Google');
+
   signInWithPopup(auth, provider)
-    .then(async (resultado) => {
+    .then(async resultado => {
+
+      console.log('2. Google terminó correctamente');
 
       const usuario = resultado.user;
 
+      console.log('3. Usuario:', usuario.email);
+
       const tokenFirebase = await usuario.getIdToken();
 
-      console.log('========================');
-      console.log('GOOGLE FUNCIONA ✅');
-      console.log('Email:', usuario.email);
-      console.log('Nombre:', usuario.displayName);
-      console.log('Token Firebase:', tokenFirebase);
-      console.log('========================');
+      console.log('4. Token Firebase obtenido');
+
+      this.http.post<LoginResponse>(
+        `${this.apiUrl}/google`,
+        {
+          token: tokenFirebase
+        }
+      )
+      .subscribe({
+
+        next: respuesta => {
+
+          console.log('5. Spring respondió ✅');
+          console.log(respuesta);
+
+          localStorage.setItem(
+            'token',
+            respuesta.token
+          );
+
+          localStorage.setItem(
+            'usuario',
+            JSON.stringify(respuesta.usuario)
+          );
+
+        },
+
+        error: error => {
+
+          console.error(
+            '6. Error de Spring:',
+            error
+          );
+
+        }
+
+      });
 
     })
-    .catch((error) => {
+    .catch(error => {
 
-      console.error('Error con Google:', error);
+      console.error(
+        'ERROR EN GOOGLE:',
+        error
+      );
 
     });
 }

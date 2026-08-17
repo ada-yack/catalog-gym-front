@@ -9,7 +9,7 @@ import { ProductoCreate } from '../../models/producto-create';
 })
 export class ProductoService {
 
-  private api = 'http://localhost:8080/api/productos';
+  private api = '/api/productos';
 
   constructor(private http: HttpClient) {}
 

@@ -120,4 +120,62 @@ export class Productos implements OnInit {
     return `https://wa.me/949626583?text=${encodeURIComponent(mensaje)}`;
   }
 
+  crearIdCategoria(categoria: string): string {
+
+  const nombre = categoria.toLowerCase();
+
+  if (nombre.includes('poleras')) {
+    return 'categoria-poleras';
+  }
+
+  if (nombre.includes('polos')) {
+    return 'categoria-polos';
+  }
+
+  if (nombre.includes('pijamas')) {
+    return 'categoria-pijamas';
+  }
+
+  if (nombre.includes('conjuntos')) {
+    return 'categoria-conjuntos';
+  }
+
+  if (nombre.includes('familia')) {
+    return 'categoria-familia';
+  }
+
+  if (nombre.includes('personaje')) {
+    return 'categoria-personaje';
+  }
+
+  return 'categoria-' + nombre
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-');
+}
+
+esPrimeraCategoria(categoria: string): boolean {
+
+  const categorias = Object.keys(this.productosPorCategoria());
+
+  const nombre = categoria.toLowerCase();
+
+  const tipo = nombre.includes('poleras') ? 'poleras' :
+               nombre.includes('polos') ? 'polos' :
+               nombre.includes('pijamas') ? 'pijamas' :
+               nombre.includes('conjuntos') ? 'conjuntos' :
+               nombre.includes('familia') ? 'familia' :
+               nombre.includes('personaje') ? 'personaje' :
+               null;
+
+  if (!tipo) {
+    return true;
+  }
+
+  const primera = categorias.find(c =>
+    c.toLowerCase().includes(tipo)
+  );
+
+  return primera === categoria;
+}
 }

@@ -1,0 +1,489 @@
+/* =========================================================
+   PÁGINA DE CATEGORÍAS
+   ========================================================= */
+
+.categorias-page {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.categorias-heading {
+  margin-bottom: 40px;
+}
+
+.categorias-tag {
+  display: inline-block;
+  margin-bottom: 12px;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--accent-red);
+}
+
+.categorias-heading h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.05em;
+
+  color: var(--text-primary);
+}
+
+.categorias-heading h1 em {
+  color: var(--accent-red);
+  font-style: normal;
+}
+
+.categorias-heading p {
+  max-width: 650px;
+  margin-top: 16px;
+
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.admin-card {
+  margin-bottom: 28px;
+  padding: 30px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border);
+
+  position: relative;
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 45px;
+  height: 3px;
+
+  background: var(--accent-red);
+}
+
+
+/* =========================================================
+   ENCABEZADO DE TARJETA
+   ========================================================= */
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 28px;
+}
+
+.card-label {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--text-muted);
+}
+
+.card-heading h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+
+  color: var(--text-primary);
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  background: rgba(224, 28, 28, 0.08);
+  border: 1px solid rgba(224, 28, 28, 0.25);
+
+  color: var(--accent-red);
+
+  font-size: 1.5rem;
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+.categoria-form {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 18px;
+
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--text-secondary);
+}
+
+.custom-input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border);
+
+  outline: none;
+
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+
+  transition: var(--transition);
+}
+
+.custom-input::placeholder {
+  color: var(--text-muted);
+}
+
+.custom-input:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 2px rgba(224, 28, 28, 0.08);
+}
+
+
+/* =========================================================
+   BOTÓN AGREGAR
+   ========================================================= */
+
+.categoria-form .btn-primary {
+  height: 46px;
+  white-space: nowrap;
+}
+
+.categoria-form .btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================================================
+   CONTADOR
+   ========================================================= */
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 25px;
+  height: 25px;
+
+  margin-left: 8px;
+  padding: 0 7px;
+
+  background: var(--accent-red);
+
+  color: #fff;
+
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.categorias-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 0.9rem;
+}
+
+.categorias-table thead {
+  border-bottom: 1px solid var(--border);
+}
+
+.categorias-table th {
+  padding: 14px 16px;
+
+  text-align: left;
+
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+
+  color: var(--text-muted);
+}
+
+.categorias-table td {
+  padding: 17px 16px;
+
+  border-bottom: 1px solid var(--border);
+
+  color: var(--text-secondary);
+}
+
+.categorias-table tbody tr {
+  transition: var(--transition);
+}
+
+.categorias-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.categorias-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   ID
+   ========================================================= */
+
+.id-cell {
+  width: 90px;
+
+  color: var(--text-muted) !important;
+
+  font-family: monospace;
+  font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   CÓDIGO
+   ========================================================= */
+
+.codigo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 55px;
+  padding: 6px 12px;
+
+  background: rgba(224, 28, 28, 0.08);
+
+  border: 1px solid rgba(224, 28, 28, 0.25);
+
+  color: var(--accent-red);
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+
+/* =========================================================
+   NOMBRE
+   ========================================================= */
+
+.nombre-cell {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   ACCIONES
+   ========================================================= */
+
+.actions-cell {
+  width: 150px;
+  text-align: right;
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  background: transparent;
+
+  border: 1px solid var(--border);
+
+  color: var(--text-secondary);
+
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.btn-delete:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+
+  background: rgba(224, 28, 28, 0.05);
+}
+
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+.status-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100px;
+
+  border: 1px dashed var(--border);
+
+  color: var(--text-secondary);
+
+  font-size: 0.85rem;
+}
+
+.status-box.error {
+  color: var(--accent-red);
+
+  border-color: rgba(224, 28, 28, 0.25);
+}
+
+
+/* =========================================================
+   SIN DATOS
+   ========================================================= */
+
+.empty-state {
+  padding: 50px 20px;
+
+  text-align: center;
+
+  border: 1px dashed var(--border);
+}
+
+.empty-icon {
+  margin-bottom: 12px;
+
+  font-size: 2rem;
+
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin-bottom: 6px;
+
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .categoria-form {
+    grid-template-columns: 1fr;
+  }
+
+  .categoria-form .btn-primary {
+    width: 100%;
+  }
+
+  .card-heading {
+    gap: 15px;
+  }
+
+  .admin-card {
+    padding: 22px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .categorias-page {
+    width: 92%;
+  }
+
+  .categorias-heading h1 {
+    font-size: 3rem;
+  }
+
+  .categorias-table th,
+  .categorias-table td {
+    padding: 13px 10px;
+  }
+
+  .actions-cell {
+    width: auto;
+  }
+
+  .btn-delete {
+    padding: 8px;
+    font-size: 0;
+  }
+
+  .btn-delete:first-letter {
+    font-size: 0.8rem;
+  }
+
+}

@@ -1,1 +1,247 @@
-<p>categorias works!</p>
+<div class="categorias-page">
+
+  <!-- ENCABEZADO -->
+  <section class="categorias-heading">
+
+    <span class="categorias-tag">
+      ADMINISTRACIÓN
+    </span>
+
+    <h1>
+      Gestionar <em>Categorías</em>
+    </h1>
+
+    <p>
+      Administra las categorías disponibles para los productos del catálogo.
+    </p>
+
+  </section>
+
+
+  <!-- CREAR CATEGORÍA -->
+  <section class="admin-card">
+
+    <div class="card-heading">
+
+      <div>
+        <span class="card-label">
+          CATÁLOGO
+        </span>
+
+        <h2>
+          Nueva categoría
+        </h2>
+      </div>
+
+      <span class="card-icon">
+        ＋
+      </span>
+
+    </div>
+
+
+    <form
+      class="categoria-form"
+      (ngSubmit)="crear()"
+    >
+
+      <div class="form-group">
+
+        <label for="codigo">
+          Código
+        </label>
+
+        <input
+          id="codigo"
+          type="text"
+          class="custom-input"
+          placeholder="Ej. POL"
+          [(ngModel)]="nuevoCodigo"
+          name="nuevoCodigo"
+          maxlength="20"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="nombre">
+          Nombre de categoría
+        </label>
+
+        <input
+          id="nombre"
+          type="text"
+          class="custom-input"
+          placeholder="Ej. Polos"
+          [(ngModel)]="nuevoNombre"
+          name="nuevoNombre"
+          maxlength="100"
+          required
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="
+          !nuevoCodigo.trim() ||
+          !nuevoNombre.trim()
+        "
+      >
+        ＋ AGREGAR CATEGORÍA
+      </button>
+
+    </form>
+
+  </section>
+
+
+  <!-- LISTADO -->
+  <section class="admin-card">
+
+    <div class="card-heading">
+
+      <div>
+
+        <span class="card-label">
+          CATÁLOGO ACTUAL
+        </span>
+
+        <h2>
+          Listado de categorías
+
+          <span class="count">
+            {{ categorias.length }}
+          </span>
+
+        </h2>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn-outline"
+        (click)="cargarCategorias()"
+        [disabled]="cargando"
+      >
+        ↻ REFRESCAR
+      </button>
+
+    </div>
+
+
+    <!-- CARGANDO -->
+    <div
+      *ngIf="cargando"
+      class="status-box"
+    >
+      Cargando categorías...
+    </div>
+
+
+    <!-- ERROR -->
+    <div
+      *ngIf="mensajeError"
+      class="status-box error"
+    >
+      {{ mensajeError }}
+    </div>
+
+
+    <!-- TABLA -->
+    <div
+      class="table-container"
+      *ngIf="!cargando && categorias.length > 0"
+    >
+
+      <table class="categorias-table">
+
+        <thead>
+
+          <tr>
+
+            <th>ID</th>
+
+            <th>CÓDIGO</th>
+
+            <th>CATEGORÍA</th>
+
+            <th>ACCIONES</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr *ngFor="let categoria of categorias">
+
+            <td class="id-cell">
+              #{{ categoria.id }}
+            </td>
+
+            <td>
+              <span class="codigo-badge">
+                {{ categoria.codigo }}
+              </span>
+            </td>
+
+            <td class="nombre-cell">
+              {{ categoria.nombre }}
+            </td>
+
+            <td class="actions-cell">
+
+              <button
+                type="button"
+                class="btn-delete"
+                (click)="eliminar(categoria.id)"
+              >
+                🗑 ELIMINAR
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- SIN DATOS -->
+    <div
+      *ngIf="
+        !cargando &&
+        categorias.length === 0 &&
+        !mensajeError
+      "
+      class="empty-state"
+    >
+
+      <div class="empty-icon">
+        📁
+      </div>
+
+      <h3>
+        No hay categorías registradas
+      </h3>
+
+      <p>
+        Agrega la primera categoría para comenzar.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

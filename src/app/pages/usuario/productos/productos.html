@@ -1,309 +1,88 @@
-
-<!-- =========================
-     PRODUCTOS
-     ========================= -->
-
 <section class="productos-main">
-
   <div class="container">
-
-
-    <!-- =========================
-         CARGANDO
-         ========================= -->
-
-    <div
-      *ngIf="cargando()"
-      class="productos-loading"
-    >
+    <!-- CARGANDO -->
+    <div *ngIf="cargando()" class="productos-loading">
       <p>Cargando productos...</p>
     </div>
 
-
-    <!-- =========================
-         ERROR
-         ========================= -->
-
-    <div
-      *ngIf="error() && !cargando()"
-      class="productos-error"
-    >
-
-      <p>
-        No se pudieron cargar los productos.
-      </p>
-
-      <button
-        type="button"
-        (click)="cargarProductos()"
-      >
-        Reintentar
-      </button>
-
+    <!-- ERROR -->
+    <div *ngIf="error() && !cargando()" class="productos-error">
+      <p>No se pudieron cargar los productos.</p>
+      <button type="button" (click)="cargarProductos()">Reintentar</button>
     </div>
 
-
-    <!-- =========================
-         CATEGORÍAS
-         ========================= -->
-
-    <ng-container
-      *ngIf="!cargando() && !error()"
-    >
-
-      <section
-        class="cat-section"
-        *ngFor="
-          let grupo of productosPorCategoria() | keyvalue
-        "
-      >
-
-
-        <!-- =========================
-             HEADER CATEGORÍA
-             ========================= -->
-
+    <!-- CATEGORÍAS -->
+    <ng-container *ngIf="!cargando() && !error()">
+      <section class="cat-section" *ngFor="let grupo of productosPorCategoria() | keyvalue ; let i = index"  
+      [id]="esPrimeraCategoria(grupo.key) ? crearIdCategoria(grupo.key) : null">
+        <!-- HEADER CATEGORÍA -->
         <div class="cat-section__header">
-
           <div class="cat-section__line"></div>
-
           <div class="cat-section__title-wrap">
-
-            <span class="cat-section__tag">
-              Colección
-            </span>
-
-            <h2 class="cat-section__title">
-              {{ grupo.key }}
-            </h2>
-
+            <span class="cat-section__tag">Colección</span>
+            <h2 class="cat-section__title">{{ grupo.key }}</h2>
           </div>
-
           <div class="cat-section__line"></div>
-
         </div>
 
-
-        <!-- =========================
-             GRID
-             ========================= -->
-
+        <!-- GRID -->
         <div class="products-grid">
-
-
-          <!-- =========================
-               PRODUCTOS
-               ========================= -->
-
-          <article
-            class="product-card"
-            *ngFor="let producto of grupo.value"
-          >
-
-
-            <!-- =========================
-                 IMAGEN
-                 ========================= -->
-
+          <article class="product-card" *ngFor="let producto of grupo.value">
+            <!-- IMAGEN -->
             <div class="product-card__img-wrap">
-
-              <span class="product-card__badge">
-                Nuevo
-              </span>
-
-
-              <img
-                *ngIf="producto.imagenes?.length"
-                [src]="producto.imagenes[0].url"
-                [alt]="producto.titulo"
-                loading="lazy"
-              >
-
-
-              <!-- OVERLAY -->
-
+              <span class="product-card__badge">Nuevo</span>
+              <img *ngIf="producto.imagenes?.length" [src]="producto.imagenes[0].url" [alt]="producto.titulo" loading="lazy">
               <div class="product-card__overlay">
-
-                <a
-                  class="product-card__pedir"
-                  [href]="crearLinkWhatsApp(producto.titulo)"
-                  target="_blank"
-                  (click)="$event.stopPropagation()"
-                >
-
-                  <i class="fa-brands fa-whatsapp"></i>
-
-                  Pedir
-
+                <a class="product-card__pedir" [href]="crearLinkWhatsApp(producto.titulo)" target="_blank" (click)="$event.stopPropagation()">
+                  <i class="fa-brands fa-whatsapp"></i> Pedir
                 </a>
-
               </div>
-
             </div>
 
-
-            <!-- =========================
-                 INFORMACIÓN
-                 ========================= -->
-
+            <!-- INFORMACIÓN -->
             <div class="product-card__body">
+              <p class="product-card__category">{{ producto.categoria }}</p>
+              <h3 class="product-card__name">{{ producto.titulo }}</h3>
+              <p class="product-card__desc" *ngIf="producto.adicional">{{ producto.adicional }}</p>
 
-
-              <!-- CATEGORÍA -->
-
-              <p class="product-card__category">
-                {{ producto.categoria }}
-              </p>
-
-
-              <!-- TÍTULO -->
-
-              <h3 class="product-card__name">
-                {{ producto.titulo }}
-              </h3>
-
-
-              <!-- DESCRIPCIÓN -->
-
-              <p
-                class="product-card__desc"
-                *ngIf="producto.adicional"
-              >
-                {{ producto.adicional }}
-              </p>
-
-
-              <!-- =========================
-                   TALLAS
-                   ========================= -->
-
-              <div
-                class="product-card__tallas"
-                *ngIf="producto.tallas?.length"
-              >
-
-                <span class="tallas__label">
-                  Tallas
-                </span>
-
+              <!-- TALLAS -->
+              <div class="product-card__tallas" *ngIf="producto.tallas?.length">
+                <span class="tallas__label">Tallas</span>
                 <span class="tallas__list">
-
-                  <ng-container
-                    *ngFor="
-                      let talla of producto.tallas;
-                      let ultimo = last
-                    "
-                  >
-
-                    {{ talla.nombre }}
-
-                    <span *ngIf="!ultimo">
-                      ·
-                    </span>
-
+                  <ng-container *ngFor="let talla of producto.tallas; let ultimo = last">
+                    {{ talla.nombre }}<span *ngIf="!ultimo"> · </span>
                   </ng-container>
-
                 </span>
-
               </div>
 
-
-              <!-- =========================
-                   PRECIOS
-                   ========================= -->
-
+              <!-- PRECIOS -->
               <div class="product-card__precios">
-
-
                 <div class="precio-item">
-
-                  <span class="precio-label">
-                    Unidad
-                  </span>
-
-                  <span class="precio-valor">
-
-                    S/
-                    {{ producto.precioUnidad | number:'1.2-2' }}
-
-                  </span>
-
+                  <span class="precio-label">Unidad</span>
+                  <span class="precio-valor">S/ {{ producto.precioUnidad | number:'1.2-2' }}</span>
                 </div>
-
-
-                <ng-container
-                  *ngIf="producto.precioTotal"
-                >
-
+                <ng-container *ngIf="producto.precioTotal">
                   <div class="precio-divider"></div>
-
-
                   <div class="precio-item">
-
-                    <span class="precio-label">
-                      Conjunto
-                    </span>
-
-                    <span
-                      class="precio-valor precio-valor--total"
-                    >
-
-                      S/
-                      {{ producto.precioTotal | number:'1.2-2' }}
-
-                    </span>
-
+                    <span class="precio-label">Conjunto</span>
+                    <span class="precio-valor precio-valor--total">S/ {{ producto.precioTotal | number:'1.2-2' }}</span>
                   </div>
-
                 </ng-container>
-
               </div>
 
-
-              <!-- =========================
-                   FOOTER
-                   ========================= -->
-
+              <!-- FOOTER -->
               <div class="product-card__footer">
-
-
-                <a
-                  class="product-card__btn-pedir"
-                  [href]="crearLinkWhatsApp(producto.titulo)"
-                  target="_blank"
-                >
-
-                  <i class="fa-brands fa-whatsapp"></i>
-
-                  Pedir ahora
-
+                <a class="product-card__btn-pedir" [href]="crearLinkWhatsApp(producto.titulo)" target="_blank">
+                  <i class="fa-brands fa-whatsapp"></i> Pedir ahora
                 </a>
-
-
-                <button
-                  type="button"
-                  class="product-card__wishlist"
-                  title="Favorito"
-                >
-
+                <button type="button" class="product-card__wishlist" title="Favorito">
                   <i class="fa-regular fa-heart"></i>
-
                 </button>
-
               </div>
-
-
             </div>
-
           </article>
-
         </div>
-
       </section>
-
     </ng-container>
-
   </div>
-
 </section>
-

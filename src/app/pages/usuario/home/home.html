@@ -97,120 +97,118 @@
   <span>{{ currentSlide + 1 }}</span> /
   <span>{{ totalSlides }}</span>
 </div>
+</section>
+ <!-- ===== PRODUCTOS DESTACADOS ===== -->
+<section class="products-section">
+  <div class="container">
+    <div class="products-section__header">
+      <div>
+        <h2 class="section-title">Nuestros <span>Productos</span></h2>
+        <p>Prendas de vestir personalizadas en Trujillo, Perú. Bordado y estampado de alta calidad.</p>
+      </div>
+      <a routerLink="/productos" class="btn-outline">Ver todos</a>
+    </div>
 
-  <!-- ===== PRODUCTOS DESTACADOS ===== -->
-  <section class="products-section">
-    <div class="container">
-      <div class="products-section__header">
-        <div>
-          <h2 class="section-title">Nuestros <span>Productos</span></h2>
-          <p>Prendas de vestir personalizadas en Trujillo, Perú. Bordado y estampado de alta calidad.</p>
+    <div class="products-grid">
+      <!-- CARD 1 - POLERAS -->
+      <div class="product-card">
+        <div class="product-card__img-wrap">
+          <span class="product-card__badge">Nuevo</span>
+          <img src="#" alt="Poleras Personalizadas" loading="lazy" />
+          <div class="product-card__overlay">
+            <a routerLink="/productos" fragment="categoria-poleras" class="product-card__quick-view">Ver más</a>
+          </div>
         </div>
-        <a href="/guiselmode/html/nosotros.html" class="btn-outline">Ver todos</a>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Poleras Personalizadas</h3>
+          <div class="product-card__footer">
+            <p class="product-card__price">S/ 165 <small>2 pzas aprox</small></p>
+            <button type="button" class="product-card__wishlist" title="Favorito">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="products-grid" id="productsGrid">
-
-        <!-- Card 1 -->
-        <div class="product-card">
-          <div class="product-card__img-wrap">
-            <span class="product-card__badge">Nuevo</span>
-            <img src="/guiselmode/IMG/Card_Index/Card_01.webp" alt="Polera Personalizada" loading="lazy" />
-            <div class="product-card__overlay">
-              <a href="/guiselmode/html/productos.html#poleras" class="product-card__quick-view">Ver más</a>
-            </div>
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Poleras Personalizadas</h3>
-            <div class="product-card__footer">
-              <p class="product-card__price">S/ 165 <small>2 pzas aprox</small></p>
-              <button class="product-card__wishlist" title="Favorito">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-            </div>
+      <!-- CARD 2 - POLOS -->
+      <div class="product-card">
+        <div class="product-card__img-wrap">
+          <img src="#" alt="Polos Personalizados" loading="lazy" />
+          <div class="product-card__overlay">
+            <a routerLink="/productos" fragment="categoria-polos" class="product-card__quick-view">Ver más</a>
           </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="product-card">
-          <div class="product-card__img-wrap">
-            <img src="/guiselmode/IMG/Card_Index/Card_02.webp" alt="Polos Personalizados" loading="lazy" />
-            <div class="product-card__overlay">
-              <a href="/guiselmode/html/productos.html#poleras" class="product-card__quick-view">Ver más</a>
-            </div>
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Polos Personalizados</h3>
-            <div class="product-card__footer">
-              <p class="product-card__price">S/ 30 <small>1 pza aprox</small></p>
-              <button class="product-card__wishlist" title="Favorito">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-            </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Polos Personalizados</h3>
+          <div class="product-card__footer">
+            <p class="product-card__price">S/ 30 <small>1 pza aprox</small></p>
+            <button type="button" class="product-card__wishlist" title="Favorito">
+              <i class="fa-regular fa-heart"></i>
+            </button>
           </div>
         </div>
+      </div>
 
-        <!-- Card 3 -->
-        <div class="product-card">
-          <div class="product-card__img-wrap">
-            <span class="product-card__badge">Popular</span>
-            <img src="/guiselmode/IMG/Card_Index/Card_03.webp" alt="Poleras Familia" loading="lazy" />
-            <div class="product-card__overlay">
-              <a href="/guiselmode/html/productos.html#pijamas" class="product-card__quick-view">Ver más</a>
-            </div>
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Pijamas Personalizadas</h3>
-            <div class="product-card__footer">
-              <p class="product-card__price">S/ 125 <small>4 pzas aprox</small></p>
-              <button class="product-card__wishlist" title="Favorito">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-            </div>
+      <!-- CARD 3 - PIJAMAS -->
+      <div class="product-card">
+        <div class="product-card__img-wrap">
+          <span class="product-card__badge">Popular</span>
+          <img src="#" alt="Pijamas Personalizadas" loading="lazy" />
+          <div class="product-card__overlay">
+            <a routerLink="/productos" fragment="categoria-pijamas" class="product-card__quick-view">Ver más</a>
           </div>
         </div>
-
-        <!-- Card 4 -->
-        <div class="product-card">
-          <div class="product-card__img-wrap">
-            <img src="/guiselmode/IMG/Card_Index/Card_04.webp" alt="Pijamas" loading="lazy" />
-            <div class="product-card__overlay">
-              <a href="/guiselmode/html/productos.html#conjuntos" class="product-card__quick-view">Ver más</a>
-            </div>
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Conjuntos Personalizados</h3>
-            <div class="product-card__footer">
-              <p class="product-card__price">S/ 330 <small>4 pzas aprox</small></p>
-              <button class="product-card__wishlist" title="Favorito">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-            </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Pijamas Personalizadas</h3>
+          <div class="product-card__footer">
+            <p class="product-card__price">S/ 125 <small>4 pzas aprox</small></p>
+            <button type="button" class="product-card__wishlist" title="Favorito">
+              <i class="fa-regular fa-heart"></i>
+            </button>
           </div>
         </div>
+      </div>
 
-        <!-- Card 5 -->
-        <div class="product-card">
-          <div class="product-card__img-wrap">
-            <img src="/guiselmode/IMG/Card_Index/Card_Pol_Familia_estamapado_01.webp" alt="Pijamas" loading="lazy" />
-            <div class="product-card__overlay">
-              <a href="/guiselmode/html/productos.html#familia" class="product-card__quick-view">Ver más</a>
-            </div>
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Poleras Personalizadas Familia</h3>
-            <div class="product-card__footer">
-              <p class="product-card__price">S/ 215 <small>3 pzas aprox</small></p>
-              <button class="product-card__wishlist" title="Favorito">
-                <i class="fa-regular fa-heart"></i>
-              </button>
-            </div>
+      <!-- CARD 4 - CONJUNTOS -->
+      <div class="product-card">
+        <div class="product-card__img-wrap">
+          <img src="#" alt="Conjuntos Personalizados" loading="lazy" />
+          <div class="product-card__overlay">
+            <a routerLink="/productos" fragment="categoria-conjuntos" class="product-card__quick-view">Ver más</a>
           </div>
         </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Conjuntos Personalizados</h3>
+          <div class="product-card__footer">
+            <p class="product-card__price">S/ 330 <small>4 pzas aprox</small></p>
+            <button type="button" class="product-card__wishlist" title="Favorito">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
+      <!-- CARD 5 - FAMILIA -->
+      <div class="product-card">
+        <div class="product-card__img-wrap">
+          <img src="#" alt="Poleras Personalizadas Familia" loading="lazy" />
+          <div class="product-card__overlay">
+            <a routerLink="/productos" fragment="categoria-familia" class="product-card__quick-view">Ver más</a>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__name">Poleras Personalizadas Familia</h3>
+          <div class="product-card__footer">
+            <p class="product-card__price">S/ 215 <small>3 pzas aprox</small></p>
+            <button type="button" class="product-card__wishlist" title="Favorito">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ===== NOSOTROS ===== -->
   <section class="nosotros-section" id="nosotros">
@@ -223,8 +221,8 @@
           <p class="nosotros__text">En G&M creemos que la moda no solo es ropa, sino una forma de expresar tu personalidad. Nuestra misión es ofrecer prendas modernas, elegantes y accesibles, pensadas para realzar tu estilo en cada ocasión.</p>
           <p class="nosotros__text">Cada colección está diseñada con pasión, cuidando cada detalle para que te sientas único(a) y seguro(a) mientras luces tus outfits favoritos.</p>
           <div class="nosotros__actions">
-            <a href="/guiselmode/html/productos.html" class="btn-primary">Ver Productos</a>
-            <a href="/guiselmode/html/nosotros.html" class="btn-outline">Leer más</a>
+            <a routerLink="/productos" class="btn-primary"> Ver Productos</a>
+            <a routerLink="/nosotros" class="btn-outline">Leer más</a>
           </div>
         </div>
 

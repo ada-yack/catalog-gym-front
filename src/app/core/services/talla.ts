@@ -12,7 +12,7 @@ export class TallaService {
 
   private http = inject(HttpClient);
 
-  private api = 'http://localhost:8080/api/tallas';
+  private api = '/api/tallas';
 
   listTallas(): Observable<Talla[]> {
 
