@@ -11,6 +11,7 @@ import { Registro } from './pages/usuario/registro/registro';
 import { adminGuard } from './core/guards/admin-guard';
 import { Tallas } from './pages/admin/tallas/tallas';
 import {Categorias  } from './pages/admin/categorias/categorias';
+import { Nosotros } from './pages/usuario/nosotros/nosotros';
 
 
 export const routes: Routes = [
@@ -39,6 +40,10 @@ export const routes: Routes = [
   component: Registro
 },
 
+{
+    path: 'nosotros',
+    component: Nosotros
+  },
   // 🛒 CARRITO
   {
     path: 'carrito',
