@@ -39,6 +39,13 @@ export const routes: Routes = [
   component: Registro
 },
 
+  // 🛒 CARRITO
+  {
+    path: 'carrito',
+    loadComponent: () =>
+      import('./pages/usuario/carrito/carrito')
+        .then(m => m.Carrito)
+  },
 
 
   // ==========================================
@@ -63,6 +70,7 @@ export const routes: Routes = [
          path: 'categorias',
         component: Categorias
       },
+
       //
       // {
       //   path: 'tallas',

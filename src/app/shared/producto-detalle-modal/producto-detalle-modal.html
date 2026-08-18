@@ -1,0 +1,143 @@
+<div
+  class="modal-overlay"
+  (click)="cerrarModal()"
+  role="presentation"
+>
+  <section
+    class="producto-modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'titulo-producto-' + producto().id"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="producto-modal__close"
+      (click)="cerrarModal()"
+      aria-label="Cerrar detalle del producto"
+    >
+      ✕
+    </button>
+
+    <div class="producto-modal__content">
+      <!-- GALERÍA -->
+      <div class="producto-gallery">
+        <div class="producto-gallery__main">
+          @if (imagenActual(); as imagen) {
+            <img
+              [src]="imagen.url"
+              [alt]="producto().titulo"
+            >
+          } @else {
+            <div class="producto-gallery__empty">
+              <i class="fa-regular fa-image"></i>
+              <span>Imagen no disponible</span>
+            </div>
+          }
+        </div>
+
+        @if (producto().imagenes?.length && producto().imagenes!.length > 1) {
+          <div class="producto-gallery__thumbs">
+            @for (
+              imagen of producto().imagenes!;
+              track imagen.id;
+              let indice = $index
+            ) {
+              <button
+                type="button"
+                class="producto-gallery__thumb"
+                [class.active]="imagenActiva() === indice"
+                (click)="seleccionarImagen(indice)"
+                [attr.aria-label]="'Ver imagen ' + (indice + 1)"
+              >
+                <img
+                  [src]="imagen.url"
+                  [alt]="producto().titulo + ', imagen ' + (indice + 1)"
+                >
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- INFORMACIÓN -->
+      <div class="producto-modal__info">
+        <span class="producto-modal__tag">
+          {{ producto().categoria }}
+        </span>
+
+        <h2
+          class="producto-modal__title"
+          [id]="'titulo-producto-' + producto().id"
+        >
+          {{ producto().titulo }}
+        </h2>
+
+        @if (producto().descripcion) {
+          <p class="producto-modal__description">
+            {{ producto().descripcion }}
+          </p>
+        }
+
+        @if (producto().adicional) {
+          <p class="producto-modal__additional">
+            {{ producto().adicional }}
+          </p>
+        }
+
+        @if (producto().tallas?.length) {
+          <div class="producto-modal__sizes">
+            <span class="producto-modal__label">Tallas disponibles</span>
+
+            <div class="producto-modal__size-list">
+              @for (talla of producto().tallas!; track talla.id) {
+                <span class="producto-modal__size">
+                  {{ talla.nombre }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="producto-modal__prices">
+          <div class="producto-modal__price">
+            <span>Precio unitario</span>
+            <strong>
+              S/ {{ producto().precioUnidad | number:'1.2-2' }}
+            </strong>
+          </div>
+
+          @if (producto().precioTotal) {
+            <div class="producto-modal__price">
+              <span>Precio conjunto</span>
+              <strong class="producto-modal__price--red">
+                S/ {{ producto().precioTotal | number:'1.2-2' }}
+              </strong>
+            </div>
+          }
+        </div>
+
+        <div class="producto-modal__actions">
+          <button
+            type="button"
+            class="producto-modal__cart"
+            (click)="agregar()"
+          >
+             <i class="fa-solid fa-cart-shopping"></i>
+            Agregar al carrito
+          </button>
+
+          <a
+            class="producto-modal__whatsapp"
+            [href]="crearLinkWhatsApp()"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fa-brands fa-whatsapp"></i>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

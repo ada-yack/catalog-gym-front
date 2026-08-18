@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.html',
   styleUrls: ['./home.css', './carousel.css']
 })
+
 export class Home implements OnInit, OnDestroy {
 
   currentSlide = 0;
@@ -14,6 +16,8 @@ export class Home implements OnInit, OnDestroy {
   totalSlides = 3;
 
   autoplay?: ReturnType<typeof setInterval>;
+
+  
 
   ngOnInit(): void {
     this.startAutoplay();

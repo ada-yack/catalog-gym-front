@@ -1,62 +1,243 @@
-<nav class="navbar" [class.scrolled]="scrolled" id="navbar">
+<nav class="navbar" [class.scrolled]="scrolled()" id="navbar">
 
   <div class="navbar__inner">
 
     <!-- LOGO -->
-    <a routerLink="/" class="navbar__logo">
+    <a
+      routerLink="/"
+      class="navbar__logo"
+      (click)="closeMenu()"
+    >
       G<span>&</span>M
     </a>
 
 
-    <!-- MENU MOBILE -->
-    <button class="navbar__hamburger" [class.active]="menuOpen"
-(click)="toggleMenu()" >
+    <!-- HAMBURGER -->
+    <button
+      type="button"
+      class="navbar__hamburger"
+      [class.active]="menuOpen()"
+      (click)="toggleMenu()"
+      aria-label="Abrir menú"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
 
 
-    <!-- LINKS -->
-    <ul class="navbar__nav" [class.open]="menuOpen">
+    <!-- NAVEGACIÓN -->
+    <ul
+      class="navbar__nav"
+      [class.open]="menuOpen()"
+    >
 
       <li>
-        <a routerLink="/productos" (click)="closeMenu()">
+        <a
+          routerLink="/productos"
+          (click)="closeMenu()"
+        >
           Productos
         </a>
       </li>
 
       <li>
-        <a routerLink="/nosotros" (click)="closeMenu()">
+        <a
+          routerLink="/nosotros"
+          (click)="closeMenu()"
+        >
           Nosotros
         </a>
       </li>
-      
+
     </ul>
 
 
     <!-- ACCIONES -->
     <div class="navbar__actions">
 
-      <button class="navbar__action-btn">
+      <!-- BUSCAR -->
+      <button
+        type="button"
+        class="navbar__action-btn"
+        [class.active]="buscadorAbierto()"
+        (click)="toggleBuscador()"
+        [attr.aria-expanded]="buscadorAbierto()"
+        aria-controls="navbar-search"
+      >
         <i class="fa-solid fa-magnifying-glass"></i>
-        <span>Buscar</span>
+
+        <span>
+          Buscar
+        </span>
       </button>
 
 
-      <button class="navbar__action-btn">
-        <i class="fa-regular fa-user" routerLink="/login" ></i>
-        <span>Cuenta</span>
+      <!-- CUENTA -->
+      <button
+        type="button"
+        class="navbar__action-btn"
+        routerLink="/login"
+        (click)="closeMenu()"
+        title="Mi cuenta"
+      >
+        <i class="fa-regular fa-user"></i>
+
+        <span>
+          Cuenta
+        </span>
       </button>
 
 
-      <button class="navbar__action-btn accent">
+      <!-- FAVORITOS -->
+      <button
+        type="button"
+        class="navbar__action-btn"
+        title="Favoritos"
+      >
         <i class="fa-regular fa-heart"></i>
-        <span>Fav</span>
+
+        <span>
+          Fav
+        </span>
+      </button>
+
+
+      <!-- 🛒 CARRITO -->
+      <button
+        type="button"
+        class="navbar__action-btn accent navbar__cart"
+        routerLink="/carrito"
+        (click)="closeMenu()"
+        title="Carrito"
+      >
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span>
+          Carrito
+        </span>
+
+        <!-- BADGE -->
+        @if (carritoService.cantidad() > 0) {
+
+          <span class="carrito-badge">
+            {{ carritoService.cantidad() }}
+          </span>
+
+        }
+
       </button>
 
     </div>
 
+  </div>
+
+
+  <!-- ================================= -->
+  <!-- BUSCADOR -->
+  <!-- ================================= -->
+
+  <div
+    *ngIf="buscadorAbierto()"
+    class="navbar-search"
+    id="navbar-search"
+  >
+
+    <div class="navbar-search__inner">
+
+      <!-- INPUT -->
+      <div class="navbar-search__input-wrap">
+
+        <i
+          class="fa-solid fa-magnifying-glass"
+          aria-hidden="true"
+        ></i>
+
+
+        <input
+          type="search"
+          [value]="terminoBusqueda()"
+          (input)="actualizarBusqueda($event)"
+          (keydown.enter)="buscar()"
+          placeholder="Buscar poleras, pijamas, bordados..."
+          autocomplete="off"
+          aria-label="Buscar productos"
+        >
+
+
+        <button
+          type="button"
+          class="navbar-search__close"
+          (click)="cerrarBuscador()"
+          aria-label="Cerrar buscador"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <!-- RESULTADOS -->
+      <div
+        *ngIf="terminoBusqueda()"
+        class="navbar-search__results"
+      >
+
+        <!-- PRODUCTOS -->
+        <button
+          *ngFor="let producto of resultados()"
+          type="button"
+          class="navbar-search__result"
+          (click)="seleccionarProducto(producto)"
+        >
+
+          <img
+            *ngIf="producto.imagenes?.length"
+            [src]="producto.imagenes![0].url"
+            [alt]="producto.titulo"
+          >
+
+          <span>
+
+            <strong>
+              {{ producto.titulo }}
+            </strong>
+
+            <small>
+              {{ producto.categoria }}
+            </small>
+
+          </span>
+
+        </button>
+
+
+        <!-- SIN RESULTADOS -->
+        <button
+          *ngIf="resultados().length === 0"
+          type="button"
+          class="navbar-search__empty"
+          (click)="buscar()"
+        >
+          Ver resultados para
+          “{{ terminoBusqueda() }}”
+        </button>
+
+
+        <!-- VER TODOS -->
+        <button
+          *ngIf="resultados().length > 0"
+          type="button"
+          class="navbar-search__all"
+          (click)="buscar()"
+        >
+          Ver todos los resultados
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 

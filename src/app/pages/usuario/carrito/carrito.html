@@ -1,1 +1,259 @@
-<p>carrito works!</p>
+<section class="carrito-hero">
+  <div class="container">
+
+    <p class="carrito-hero__tag">
+      Tu selección
+    </p>
+
+    <h1 class="carrito-hero__title">
+      Mi <em>Carrito</em>
+    </h1>
+
+    <p class="carrito-hero__sub">
+      Revisa los productos que te interesaron
+      y envíalos por WhatsApp.
+    </p>
+
+  </div>
+</section>
+
+
+<main class="carrito-main">
+
+  <div class="container">
+
+    <!-- CARRITO VACÍO -->
+
+    <div
+      *ngIf="estaVacio()"
+      class="carrito-empty"
+    >
+
+      <i class="fa-solid fa-cart-shopping"></i>
+
+      <p>
+        Tu carrito está vacío
+      </p>
+
+      <a
+        routerLink="/productos"
+        class="btn-primary"
+      >
+        Ver productos
+      </a>
+
+    </div>
+
+
+    <!-- CARRITO CON PRODUCTOS -->
+
+    <div
+      *ngIf="!estaVacio()"
+      class="carrito-layout"
+    >
+
+      <!-- LISTA -->
+
+      <div class="carrito-lista">
+
+        <div class="carrito-lista__header">
+
+          <h2 class="carrito-lista__title">
+
+            {{ cantidad() }}
+
+            producto{{ cantidad() !== 1 ? 's' : '' }}
+
+            seleccionado{{ cantidad() !== 1 ? 's' : '' }}
+
+          </h2>
+
+          <button
+            type="button"
+            class="carrito-btn-vaciar"
+            (click)="vaciar()"
+          >
+
+            <i class="fa-solid fa-trash"></i>
+
+            Vaciar
+
+          </button>
+
+        </div>
+
+
+        <!-- PRODUCTOS -->
+
+        <div
+          class="carrito-item"
+          *ngFor="let producto of carrito()"
+        >
+
+          <!-- IMAGEN -->
+
+          <div class="carrito-item__img">
+
+            <img
+              *ngIf="producto.imagenes?.length"
+              [src]="producto.imagenes![0].url"
+              [alt]="producto.titulo"
+            >
+
+            <div
+              *ngIf="!producto.imagenes?.length"
+              class="carrito-item__img-placeholder"
+            >
+              <i class="fa-regular fa-image"></i>
+            </div>
+
+          </div>
+
+
+          <!-- INFORMACIÓN -->
+
+          <div class="carrito-item__info">
+
+            <p class="carrito-item__cat">
+              {{ producto.categoria }}
+            </p>
+
+            <h3 class="carrito-item__titulo">
+              {{ producto.titulo }}
+            </h3>
+
+            <div class="carrito-item__precios">
+
+              <span class="carrito-item__precio">
+
+                S/
+                {{ producto.precioUnidad | number:'1.2-2' }}
+
+              </span>
+
+              <span
+                *ngIf="producto.precioTotal"
+                class="carrito-item__precio--total"
+              >
+
+                Conjunto
+                S/
+                {{ producto.precioTotal | number:'1.2-2' }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ELIMINAR -->
+
+          <button
+            type="button"
+            class="carrito-item__remove"
+            title="Quitar producto"
+            (click)="eliminar(producto.id)"
+          >
+
+            <i class="fa-solid fa-xmark"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- RESUMEN -->
+
+      <aside class="carrito-resumen">
+
+        <div class="carrito-resumen__inner">
+
+          <h3 class="carrito-resumen__title">
+            Resumen
+          </h3>
+
+          <div class="carrito-resumen__line"></div>
+
+
+          <!-- PRODUCTOS DEL RESUMEN -->
+
+          <div
+            class="carrito-resumen__item"
+            *ngFor="let producto of carrito()"
+          >
+
+            <span>
+              {{ producto.titulo }}
+            </span>
+
+            <span>
+              S/
+              {{ producto.precioUnidad | number:'1.2-2' }}
+            </span>
+
+          </div>
+
+
+          <div class="carrito-resumen__line"></div>
+
+
+          <!-- TOTAL -->
+
+          <div
+            class="carrito-resumen__total-row"
+          >
+
+            <span>
+              Total estimado
+            </span>
+
+            <strong>
+              S/
+              {{ total() | number:'1.2-2' }}
+            </strong>
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <button
+            type="button"
+            class="btn-primary carrito-resumen__btn"
+            (click)="pedirPorWhatsApp()"
+          >
+
+            <i class="fa-brands fa-whatsapp"></i>
+
+            Pedir todo por WhatsApp
+
+          </button>
+
+
+          <!-- VACÍAR -->
+
+          <button
+            type="button"
+            class="carrito-btn-vaciar"
+            style="width:100%;margin-top:10px;justify-content:center"
+            (click)="vaciar()"
+          >
+
+            <i class="fa-solid fa-trash"></i>
+
+            Vaciar carrito
+
+          </button>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</main>
