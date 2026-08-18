@@ -102,31 +102,34 @@ agregarAlCarrito(producto: Producto): void {
     Object.keys(this.productosPorCategoriaFiltrados()).length > 0,
   );
 
-  ngOnInit(): void {
-    this.route.fragment
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(fragmento => {
-        this.fragmentoPendiente.set(fragmento);
-        this.irACategoriaPendiente();
-      });
+ngOnInit(): void {
 
-    this.route.queryParamMap
-  .pipe(takeUntilDestroyed(this.destroyRef))
-  .subscribe(params => {
+  this.cargarProductos();
 
-    this.terminoBusqueda.set(
-      params.get('buscar') ?? ''
-    );
+  this.route.fragment
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(fragmento => {
+      this.fragmentoPendiente.set(fragmento);
+      this.irACategoriaPendiente();
+    });
 
-    const productoId = params.get('producto');
+  this.route.queryParamMap
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(params => {
 
-    this.productoIdPendiente.set(
-      productoId ? Number(productoId) : null
-    );
+      this.terminoBusqueda.set(
+        params.get('buscar') ?? ''
+      );
 
-    this.abrirProductoPendiente();
-  });
-  }
+      const productoId = params.get('producto');
+
+      this.productoIdPendiente.set(
+        productoId ? Number(productoId) : null
+      );
+
+      this.abrirProductoPendiente();
+    });
+}
 
   cargarProductos(): void {
     this.cargando.set(true);
